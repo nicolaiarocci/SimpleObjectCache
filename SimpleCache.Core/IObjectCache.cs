@@ -8,7 +8,7 @@ namespace Amica.vNext.SimpleCache
     /// IObjectCache is the core interface on which SimpleCache is built, it is an
     /// interface describing an asynchronous persistent key-value store. 
     /// </summary>
-    public interface IObjectCache
+    public interface IObjectCache : IDisposable
     {
         /// <summary>
         /// Retrieve an object of type T from the key-value cache. 
@@ -21,32 +21,34 @@ namespace Amica.vNext.SimpleCache
         /// Retrieve all objects of type T from the key-value cache. 
         /// </summary>
         /// <returns>Objects of type T stored in the cache.</returns>
-	Task<IEnumerable<T>> GetAll<T>();
+	Task<IEnumerable<T>> GetAllAsync<T>();
 
         /// <summary>
-        /// Insert or replaces an object into the cache, with the specified key and expiration
-        /// date.
+        /// Insert an object into the cache, with the specified key and expiration
+        /// date. If the key exists the cache record is replaced.
         /// </summary>
         /// <param name="key">The key to use for the data.</param>
         /// <param name="value">The value to save in the cache.</param>
         /// <param name="absoluteExpiration">An optional expiration date.
         /// After the specified date, the key-value pair should be removed.</param>
 	/// <returns> The number of rows inserted.</returns>
-        Task<int> InsertOrReplaceAsync<T>(string key, T value, DateTimeOffset? absoluteExpiration = null);
+        Task<int> InsertAsync<T>(string key, T value, DateTimeOffset? absoluteExpiration = null);
 
         /// <summary>
         /// Remove an object from the cache. If the key doesn't exist, this method
         /// should do nothing and return (*not* throw KeyNotFoundException).
         /// </summary>
         /// <param name="key">The key to remove from the cache.</param>
-        Task InvalidateAsync<T>(string key);
+	/// <returns>The number of objects deleted.</returns>
+        Task<int> InvalidateAsync<T>(string key);
 
         /// <summary>
         /// Invalidate all entries in the cache (i.e. clear it). Note that
         /// this method is blocking and incurs a significant performance
         /// penalty if used while the cache is being used on other threads. 
         /// </summary>
-        Task InvalidateAllAsync();
+	/// <returns>The number of objects deleted.</returns>
+        Task<int> InvalidateAllAsync();
 
         /// <summary>
         /// Invalidate all objects T in the cache (i.e. clear it). Note that
@@ -109,14 +111,16 @@ namespace Amica.vNext.SimpleCache
         /// </summary>
         /// <param name="keyValuePairs">The data to insert into the cache</param>
         /// <param name="absoluteExpiration">An optional expiration date.</param>
-        Task InsertAsync<T>(IDictionary<string, T> keyValuePairs, DateTimeOffset? absoluteExpiration = null);
+	/// <returns>The number of objects deleted.</returns>
+        Task<int> InsertAsync<T>(IDictionary<string, T> keyValuePairs, DateTimeOffset? absoluteExpiration = null);
 
         /// <summary>
         /// Invalidates several objects from the cache. It is important that the Type
         /// Parameter for this method be correct.
         /// </summary>
         /// <param name="keys">The key to invalidate.</param>
-        Task InvalidateAsync<T>(IEnumerable<string> keys);
+	/// <returns>The number of objects deleted.</returns>
+        Task<int> InvalidateAsync<T>(IEnumerable<string> keys);
 
     }
 }

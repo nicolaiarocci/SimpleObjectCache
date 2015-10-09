@@ -7,7 +7,7 @@
     <ProjectGuid>{5A320348-7AE0-421A-B3EC-25FF8FED4243}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimpleCache.Net4</RootNamespace>
+    <RootNamespace>Amica.vNext.SimpleCache</RootNamespace>
     <AssemblyName>SimpleCache.Net4</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -80,11 +80,11 @@
     <Compile Include="..\SimpleCache.Core\SQLiteAsync.cs">
       <Link>SQLiteAsync.cs</Link>
     </Compile>
-    <Compile Include="..\SimpleCache.Core\SqLiteObjectCacheBase.cs">
-      <Link>SqLiteObjectCacheBase.cs</Link>
+    <Compile Include="..\SimpleCache.Core\SqliteObjectCacheBase.cs">
+      <Link>SqliteObjectCacheBase.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqLiteObjectCache.cs" />
+    <Compile Include="SqliteObjectCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

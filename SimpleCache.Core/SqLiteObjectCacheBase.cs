@@ -2,13 +2,17 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using SQLite;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
 
+[assembly:InternalsVisibleTo("Tests")]
+
 namespace Amica.vNext.SimpleCache
 {
+
     public abstract class SqLiteObjectCacheBase : IObjectCache
     {
         private static SQLiteAsyncConnection _connection;
@@ -38,6 +42,7 @@ namespace Amica.vNext.SimpleCache
         /// <returns>The intended location, filename included, for the cache 
         /// database.</returns>
         protected abstract string GetDatabasePath();
+
 
 	/// <summary>
 	///  Returns an open connection to the cache database. If necessary,
@@ -78,7 +83,6 @@ namespace Amica.vNext.SimpleCache
 	    var serializer = JsonSerializer.Create();
 	    var ms = new MemoryStream();
 	    var writer = new BsonWriter(ms);
-
 	    serializer.Serialize(writer, value);
 	    return ms.ToArray();
 	}
@@ -96,7 +100,7 @@ namespace Amica.vNext.SimpleCache
             return DeserializeObject<T>(element.Value);
         }
 
-        public async Task<IEnumerable<T>> GetAll<T>()
+        public async Task<IEnumerable<T>> GetAllAsync<T>()
         {
             var conn = ConnectionInitializer();
             var query = conn.Table<CacheElement>().Where(v => v.TypeName == typeof (T).FullName);
@@ -114,7 +118,7 @@ namespace Amica.vNext.SimpleCache
             throw new NotImplementedException();
         }
 
-        public async Task<int> InsertOrReplaceAsync<T>(string key, T value, DateTimeOffset? absoluteExpiration = null)
+        public async Task<int> InsertAsync<T>(string key, T value, DateTimeOffset? absoluteExpiration = null)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
 
@@ -133,12 +137,24 @@ namespace Amica.vNext.SimpleCache
             });
         }
 
-        public Task InvalidateAsync<T>(string key)
+        public async Task<int> InvalidateAsync<T>(string key)
         {
-            throw new NotImplementedException();
+            if (key == null) throw new ArgumentNullException(nameof(key));
+
+            var conn = ConnectionInitializer();
+
+            var element = await conn.FindAsync<CacheElement>(key);
+            if (element == null)
+                throw new KeyNotFoundException(nameof(key));
+
+            var typeName = typeof (T).FullName;
+            if (element.TypeName != typeName)
+                throw new Exception("Cached item is not of type {typeName}");
+
+            return await conn.DeleteAsync(element);
         }
 
-        public Task InvalidateAllAsync()
+        public Task<int> InvalidateAllAsync()
         {
             throw new NotImplementedException();
         }
@@ -168,5 +184,9 @@ namespace Amica.vNext.SimpleCache
             throw new NotImplementedException();
         }
 
+        public void Dispose()
+        {
+                _connection = null;
+        }
     }
 }

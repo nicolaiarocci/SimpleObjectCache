@@ -1,10 +1,9 @@
 ﻿using System;
 using System.IO;
-using Amica.vNext.SimpleCache;
 
-namespace SimpleCache.Net4
+namespace Amica.vNext.SimpleCache
 {
-    class SqLiteObjectCache : SqLiteObjectCacheBase
+    public class SqliteObjectCache : SqLiteObjectCacheBase
     {
         protected override string GetDatabasePath()
         {
