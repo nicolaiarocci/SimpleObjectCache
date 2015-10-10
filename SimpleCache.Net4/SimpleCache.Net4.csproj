@@ -71,6 +71,9 @@
     <Compile Include="..\SimpleCache.Core\CacheElement.cs">
       <Link>CacheElement.cs</Link>
     </Compile>
+    <Compile Include="..\SimpleCache.Core\Exceptions.cs">
+      <Link>Exceptions.cs</Link>
+    </Compile>
     <Compile Include="..\SimpleCache.Core\IObjectCache.cs">
       <Link>IObjectCache.cs</Link>
     </Compile>

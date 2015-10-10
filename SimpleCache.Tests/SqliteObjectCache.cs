@@ -114,6 +114,34 @@ namespace Amica.vNext.SimpleCache.Tests
             Assert.That(restoredPerson.Age, Is.EqualTo(person.Age));
         }
 
+	[Test]
+        public async Task GetCreatedAt()
+        {
+
+            const string key = "key";
+            const string notExistingKey = "unkey";
+
+            Assert.That(async () => await _cache.Get<Person>(null),
+                Throws.Exception
+                    .TypeOf<ArgumentNullException>()
+                    .With.Property("ParamName")
+                    .EqualTo(key));
+
+            Assert.That(async () => await _cache.Get<Person>(notExistingKey),
+                Throws.Exception
+                    .TypeOf<KeyNotFoundException>()
+                    .With.Message
+                    .EqualTo(key));
+
+            var person = new Person() {Name = "john", Age = 19};
+            Assert.That(async () => await _cache.Insert(key, person), 
+		Is.EqualTo(1));
+
+            var restoredPerson = await _cache.Get<Person>(key);
+            Assert.That(restoredPerson.Name, Is.EqualTo(person.Name));
+            Assert.That(restoredPerson.Age, Is.EqualTo(person.Age));
+        }
+
         [Test]
         public async Task GetAll()
         {
@@ -183,11 +211,8 @@ namespace Amica.vNext.SimpleCache.Tests
             Assert.That(async () => await _cache.Insert(key, person), 
 		Is.EqualTo(1));
 
-	    var typeName = typeof (Address).FullName;
             Assert.That(async () => await _cache.Invalidate<Address>(key), 
-                Throws.Exception
-                    .With.Message
-                    .EqualTo($"Cached item is not of type {typeName}"));
+                Throws.TypeOf<TypeMismatchException>());
 
 	    var deleted = await _cache.Invalidate<Person>(key);
 	    Assert.That(deleted, Is.EqualTo(1));

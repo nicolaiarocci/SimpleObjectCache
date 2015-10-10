@@ -100,6 +100,23 @@ namespace Amica.vNext.SimpleCache
             return DeserializeObject<T>(element.Value);
         }
 
+        public async Task<DateTimeOffset?> GetCreatedAt<T>(string key)
+        {
+            if (key == null) throw new ArgumentNullException(nameof(key));
+
+            var conn = GetConnection();
+
+            var element = await conn.FindAsync<CacheElement>(key);
+            if (element == null)
+                return null;
+
+            var typeName = typeof (T).FullName;
+            if (typeName != element.TypeName)
+                throw new TypeMismatchException();
+
+	    return element.CreatedAt;
+        }
+
         public async Task<IEnumerable<T>> GetAll<T>()
         {
             var conn = GetConnection();
@@ -145,7 +162,7 @@ namespace Amica.vNext.SimpleCache
 
             var typeName = typeof (T).FullName;
             if (element.TypeName != typeName)
-                throw new Exception($"Cached item is not of type {typeName}");
+                throw new TypeMismatchException();
 
             return await conn.DeleteAsync(element);
         }
@@ -164,11 +181,6 @@ namespace Amica.vNext.SimpleCache
         }
 
         public Task Flush()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<DateTimeOffset?> GetCreatedAt<T>(string key)
         {
             throw new NotImplementedException();
         }
