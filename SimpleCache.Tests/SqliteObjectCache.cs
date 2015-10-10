@@ -158,7 +158,7 @@ namespace Amica.vNext.SimpleCache.Tests
 	    }
 
             var returnedOthers = await _cache.GetAll<Other>();
-            Assert.That(returnedOthers.Count(), Is.EqualTo(0));
+            Assert.That(returnedOthers, Is.Empty);
         }
 
 	[Test]
@@ -198,6 +198,46 @@ namespace Amica.vNext.SimpleCache.Tests
                     .With.Message
                     .EqualTo(key));
         }
+
+	[Test]
+        public async Task InvalidateAll()
+        {
+            var peopleChallenge = new List<Person>()
+            {
+                new Person {Name = "john", Age = 10},
+                new Person {Name = "mike", Age = 20}
+            };
+            await _cache.Insert("john", peopleChallenge[0]); 
+            await _cache.Insert("mike", peopleChallenge[1]); 
+
+            var addressChallenge = new List<Address>()
+            {
+                new Address {Street = "Hollywood"},
+                new Address {Street = "Junction"},
+                new Address {Street = "Grand Station"},
+            };
+            await _cache.Insert("address1", addressChallenge[0]); 
+            await _cache.Insert("address2", addressChallenge[1]); 
+            await _cache.Insert("address3", addressChallenge[2]); 
+	    
+
+            var deleted = await _cache.InvalidateAll<Person>();
+            Assert.That(deleted, Is.EqualTo(2));
+
+            var persons = await _cache.GetAll<Person>();
+            Assert.That(persons, Is.Empty);
+
+            const int expectedCount = 3;
+            var returnedAddresses = await _cache.GetAll<Address>();
+            var addresses = returnedAddresses as IList<Address> ?? returnedAddresses.ToList();
+
+            Assert.That(addresses.Count(), Is.EqualTo(expectedCount));
+	    for (var i = 0; i < expectedCount; i++)
+	    {
+	        Assert.That(addresses[i].Street, Is.EqualTo(addressChallenge[i].Street));
+	    }
+        }
+
     }
 
     class Person

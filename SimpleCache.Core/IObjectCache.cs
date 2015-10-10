@@ -41,7 +41,7 @@ namespace Amica.vNext.SimpleCache
         /// returns an Exception.
         /// </summary>
         /// <param name="key">The key to remove from the cache.</param>
-	/// <returns>The number of objects deleted.</returns>
+	/// <returns>The number of objects deleted from the cache.</returns>
         Task<int> Invalidate<T>(string key);
 
         /// <summary>
@@ -49,7 +49,8 @@ namespace Amica.vNext.SimpleCache
         /// this method is blocking and incurs a significant performance
         /// penalty if used while the cache is being used on other threads. 
         /// </summary>
-        Task InvalidateAll<T>();
+	/// <returns>The number of objects deleted from the cache.</returns>
+        Task<int> InvalidateAll<T>();
 
         /// <summary>
         /// This method eagerly removes all expired keys from the blob cache, as
