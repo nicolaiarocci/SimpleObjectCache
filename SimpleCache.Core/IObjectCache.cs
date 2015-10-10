@@ -73,13 +73,6 @@ namespace Amica.vNext.SimpleCache
         /// <returns>The date the key was created on.</returns>
         Task<DateTimeOffset?> GetCreatedAt<T>(string key);
 
-        /// <summary>
-        /// Returns the times that the keys were added to the cache, or returns 
-        /// null if a key isn't in the cache.
-        /// </summary>
-        /// <param name="keys">The keys to return the date for.</param>
-        /// <returns>The date the key was created on.</returns>
-        Task<IDictionary<string, DateTimeOffset?>> GetCreatedAt(IEnumerable<string> keys);
     }
 
     public interface IObjectsCache : IObjectCache
@@ -109,5 +102,12 @@ namespace Amica.vNext.SimpleCache
 	/// <returns>The number of objects deleted.</returns>
         Task<int> Invalidate<T>(IEnumerable<string> keys);
 
+        /// <summary>
+        /// Returns the times that the keys were added to the cache, or returns 
+        /// null if a key isn't in the cache.
+        /// </summary>
+        /// <param name="keys">The keys to return the date for.</param>
+        /// <returns>The date the key was created on.</returns>
+        Task<IDictionary<string, DateTimeOffset?>> GetCreatedAt(IEnumerable<string> keys);
     }
 }

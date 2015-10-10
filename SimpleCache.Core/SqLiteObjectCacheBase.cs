@@ -173,11 +173,6 @@ namespace Amica.vNext.SimpleCache
             throw new NotImplementedException();
         }
 
-        public Task<IDictionary<string, DateTimeOffset?>> GetCreatedAt(IEnumerable<string> keys)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Dispose()
         {
                 _connection = null;
