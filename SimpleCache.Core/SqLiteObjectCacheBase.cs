@@ -49,7 +49,7 @@ namespace Amica.vNext.SimpleCache
 	/// initialize the database too.
 	/// </summary>
 	/// <returns>An active connection to the cache database.</returns>
-        private SQLiteAsyncConnection ConnectionInitializer()
+        private SQLiteAsyncConnection GetConnection()
         {
             if (_connection != null) return _connection;
 
@@ -87,11 +87,11 @@ namespace Amica.vNext.SimpleCache
 	    return ms.ToArray();
 	}
 
-        public async Task<T> GetAsync<T>(string key)
+        public async Task<T> Get<T>(string key)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
 
-            var conn = ConnectionInitializer();
+            var conn = GetConnection();
 
             var element = await conn.FindAsync<CacheElement>(key);
             if (element == null)
@@ -100,9 +100,9 @@ namespace Amica.vNext.SimpleCache
             return DeserializeObject<T>(element.Value);
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync<T>()
+        public async Task<IEnumerable<T>> GetAll<T>()
         {
-            var conn = ConnectionInitializer();
+            var conn = GetConnection();
             var query = conn.Table<CacheElement>().Where(v => v.TypeName == typeof (T).FullName);
 
             var elements = new List<T>();
@@ -113,12 +113,12 @@ namespace Amica.vNext.SimpleCache
 	    );
             return elements.AsEnumerable();
         }
-        public Task<IEnumerable<string>> GetAllKeysAsync()
+        public Task<IEnumerable<string>> GetAllKeys()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<int> InsertAsync<T>(string key, T value, DateTimeOffset? absoluteExpiration = null)
+        public async Task<int> Insert<T>(string key, T value, DateTimeOffset? absoluteExpiration = null)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
 
@@ -126,7 +126,7 @@ namespace Amica.vNext.SimpleCache
             var exp = (absoluteExpiration ?? DateTimeOffset.MaxValue).UtcDateTime;
             var createdAt = DateTimeOffset.Now.UtcDateTime;
 
-            var conn = ConnectionInitializer();
+            var conn = GetConnection();
             return await conn.InsertOrReplaceAsync(new CacheElement()
             {
                 Key = key,
@@ -137,11 +137,11 @@ namespace Amica.vNext.SimpleCache
             });
         }
 
-        public async Task<int> InvalidateAsync<T>(string key)
+        public async Task<int> Invalidate<T>(string key)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
 
-            var conn = ConnectionInitializer();
+            var conn = GetConnection();
 
             var element = await conn.FindAsync<CacheElement>(key);
             if (element == null)
@@ -154,27 +154,22 @@ namespace Amica.vNext.SimpleCache
             return await conn.DeleteAsync(element);
         }
 
-        public Task<int> InvalidateAllAsync()
+        public Task InvalidateAll<T>()
         {
             throw new NotImplementedException();
         }
 
-        public Task InvalidateAllAsync<T>()
+        public Task Vacuum()
         {
             throw new NotImplementedException();
         }
 
-        public Task VacuumAsync()
+        public Task Flush()
         {
             throw new NotImplementedException();
         }
 
-        public Task FlushAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<DateTimeOffset?> GetCreatedAtAsync<T>(string key)
+        public Task<DateTimeOffset?> GetCreatedAt<T>(string key)
         {
             throw new NotImplementedException();
         }
