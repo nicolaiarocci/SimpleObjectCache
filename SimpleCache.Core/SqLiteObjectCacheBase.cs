@@ -145,7 +145,7 @@ namespace Amica.vNext.SimpleCache
 
             var typeName = typeof (T).FullName;
             if (element.TypeName != typeName)
-                throw new Exception("Cached item is not of type {typeName}");
+                throw new Exception($"Cached item is not of type {typeName}");
 
             return await conn.DeleteAsync(element);
         }
