@@ -113,10 +113,6 @@ namespace Amica.vNext.SimpleCache
 	    );
             return elements.AsEnumerable();
         }
-        public Task<IEnumerable<string>> GetAllKeys()
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<int> Insert<T>(string key, T value, DateTimeOffset? absoluteExpiration = null)
         {

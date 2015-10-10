@@ -64,14 +64,6 @@ namespace Amica.vNext.SimpleCache
         /// </summary>
         Task Flush();
 
-        /// <summary>
-        /// Return all keys in the cache. Note that this method is normally
-        /// for diagnostic / testing purposes, and that it is not guaranteed
-        /// to be accurate with respect to in-flight requests.
-        /// </summary>
-        /// <returns>A list of valid keys for the cache.</returns>
-        Task<IEnumerable<string>> GetAllKeys();
-
 	/// <summary>
         /// Returns the time that the key was added to the cache, or returns 
         /// null if the key isn't in the cache.
