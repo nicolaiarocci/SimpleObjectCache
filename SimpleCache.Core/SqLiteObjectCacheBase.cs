@@ -161,12 +161,12 @@ namespace Amica.vNext.SimpleCache
             return await conn.DeleteAsync(element);
         }
 
-        public Task<int> InvalidateAll<T>()
+        public async Task<int> InvalidateAll<T>()
         {
             var conn = GetConnection();
 
             var typeName = typeof (T).FullName;
-            return conn.ExecuteAsync($"DELETE FROM CacheElement WHERE TypeName = '{typeName}'");
+            return await conn.ExecuteAsync($"DELETE FROM CacheElement WHERE TypeName = '{typeName}'");
         }
 
         public Task Vacuum()
