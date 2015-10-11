@@ -7,10 +7,11 @@ using NUnit.Framework;
 using SQLite;
 
 // ReSharper disable once CheckNamespace
+
 namespace Amica.vNext.SimpleCache.Tests
 {
     [TestFixture]
-    class SqliteObjectCache
+    internal class SqliteObjectCache
     {
         private string _expectedDatabasePath;
         private const string AppName = "test";
@@ -24,20 +25,20 @@ namespace Amica.vNext.SimpleCache.Tests
             _cache.ApplicationName = AppName;
 
             _expectedDatabasePath = Path.Combine(
-		Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), AppName), 
-		"SimpleCache");
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), AppName),
+                "SimpleCache");
 
             Directory.CreateDirectory(_expectedDatabasePath);
             _connection = new SQLiteConnection(Path.Combine(_expectedDatabasePath, "cache.db3"));
-	    _connection.DropTable<CacheElement>();
+            _connection.DropTable<CacheElement>();
 
         }
 
-	[TearDown]
+        [TearDown]
         public void TearDown()
         {
             _cache.Dispose();
-	    _connection.Close();
+            _connection.Close();
         }
 
 
@@ -46,10 +47,10 @@ namespace Amica.vNext.SimpleCache.Tests
         {
             _cache.ApplicationName = null;
 
-	    Assert.That(() => _cache.ApplicationName,
-            Throws.Exception
-                .TypeOf<Exception>()
-                .With.Message.EqualTo("Make sure to set ApplicationName on startup"));
+            Assert.That(() => _cache.ApplicationName,
+                Throws.Exception
+                    .TypeOf<Exception>()
+                    .With.Message.EqualTo("Make sure to set ApplicationName on startup"));
 
             _cache.ApplicationName = AppName;
             Assert.That(_cache.ApplicationName, Is.EqualTo(AppName));
@@ -69,15 +70,15 @@ namespace Amica.vNext.SimpleCache.Tests
                     .EqualTo(key));
 
             var person = new Person() {Name = "john", Age = 19};
-            Assert.That(async () => await _cache.Insert(key, person), 
-		Is.EqualTo(1));
+            Assert.That(async () => await _cache.Insert(key, person),
+                Is.EqualTo(1));
 
             var restoredPerson = await _cache.Get<Person>(key);
             Assert.That(restoredPerson.Name, Is.EqualTo(person.Name));
             Assert.That(restoredPerson.Age, Is.EqualTo(person.Age));
 
             // re-inserting with same key overwrites old value.
-            var anotherPerson = new Person() { Name = "mike", Age = 30 };
+            var anotherPerson = new Person() {Name = "mike", Age = 30};
             Assert.That(async () => await _cache.Insert(key, anotherPerson),
                 Is.EqualTo(1));
 
@@ -86,7 +87,7 @@ namespace Amica.vNext.SimpleCache.Tests
             Assert.That(restoredPerson.Age, Is.EqualTo(anotherPerson.Age));
         }
 
-	[Test]
+        [Test]
         public async Task Get()
         {
 
@@ -106,15 +107,15 @@ namespace Amica.vNext.SimpleCache.Tests
                     .EqualTo(key));
 
             var person = new Person() {Name = "john", Age = 19};
-            Assert.That(async () => await _cache.Insert(key, person), 
-		Is.EqualTo(1));
+            Assert.That(async () => await _cache.Insert(key, person),
+                Is.EqualTo(1));
 
             var restoredPerson = await _cache.Get<Person>(key);
             Assert.That(restoredPerson.Name, Is.EqualTo(person.Name));
             Assert.That(restoredPerson.Age, Is.EqualTo(person.Age));
         }
 
-	[Test]
+        [Test]
         public async Task GetCreatedAt()
         {
 
@@ -128,14 +129,14 @@ namespace Amica.vNext.SimpleCache.Tests
                     .EqualTo(key));
 
             var person = new Person() {Name = "john", Age = 19};
-            Assert.That(async () => await _cache.Insert(key, person), 
-		Is.EqualTo(1));
+            Assert.That(async () => await _cache.Insert(key, person),
+                Is.EqualTo(1));
 
             var createdAt = await _cache.GetCreatedAt(key);
             Assert.That(createdAt.Value.UtcDateTime, Is.EqualTo(DateTimeOffset.Now.UtcDateTime).Within(1).Seconds);
 
-            Assert.That(async () => await _cache.GetCreatedAt(notExistingKey), 
-		Is.Null);
+            Assert.That(async () => await _cache.GetCreatedAt(notExistingKey),
+                Is.Null);
         }
 
         [Test]
@@ -146,8 +147,8 @@ namespace Amica.vNext.SimpleCache.Tests
                 new Person {Name = "john", Age = 10},
                 new Person {Name = "mike", Age = 20}
             };
-            await _cache.Insert("john", peopleChallenge[0]); 
-            await _cache.Insert("mike", peopleChallenge[1]); 
+            await _cache.Insert("john", peopleChallenge[0]);
+            await _cache.Insert("mike", peopleChallenge[1]);
 
             var addressChallenge = new List<Address>()
             {
@@ -155,72 +156,72 @@ namespace Amica.vNext.SimpleCache.Tests
                 new Address {Street = "Junction"},
                 new Address {Street = "Grand Station"},
             };
-            await _cache.Insert("address1", addressChallenge[0]); 
-            await _cache.Insert("address2", addressChallenge[1]); 
-            await _cache.Insert("address3", addressChallenge[2]); 
-	    
+            await _cache.Insert("address1", addressChallenge[0]);
+            await _cache.Insert("address2", addressChallenge[1]);
+            await _cache.Insert("address3", addressChallenge[2]);
+
 
             var expectedCount = 2;
             var returnedPersons = await _cache.GetAll<Person>();
             var persons = returnedPersons as IList<Person> ?? returnedPersons.ToList();
 
             Assert.That(persons.Count(), Is.EqualTo(expectedCount));
-	    for (var i = 0; i < expectedCount; i++)
-	    {
-	        Assert.That(persons[i].Name, Is.EqualTo(peopleChallenge[i].Name));
-	        Assert.That(persons[i].Age, Is.EqualTo(peopleChallenge[i].Age));
-	    }
+            for (var i = 0; i < expectedCount; i++)
+            {
+                Assert.That(persons[i].Name, Is.EqualTo(peopleChallenge[i].Name));
+                Assert.That(persons[i].Age, Is.EqualTo(peopleChallenge[i].Age));
+            }
 
             expectedCount = 3;
             var returnedAddresses = await _cache.GetAll<Address>();
             var addresses = returnedAddresses as IList<Address> ?? returnedAddresses.ToList();
 
             Assert.That(addresses.Count(), Is.EqualTo(expectedCount));
-	    for (var i = 0; i < expectedCount; i++)
-	    {
-	        Assert.That(addresses[i].Street, Is.EqualTo(addressChallenge[i].Street));
-	    }
+            for (var i = 0; i < expectedCount; i++)
+            {
+                Assert.That(addresses[i].Street, Is.EqualTo(addressChallenge[i].Street));
+            }
 
             var returnedOthers = await _cache.GetAll<Other>();
             Assert.That(returnedOthers, Is.Empty);
         }
 
-	[Test]
+        [Test]
         public async Task Invalidate()
         {
             const string key = "key";
             const string notExistingKey = "unkey";
 
-            Assert.That(async () => await _cache.Invalidate<Person>(null), 
+            Assert.That(async () => await _cache.Invalidate<Person>(null),
                 Throws.Exception
                     .TypeOf<ArgumentNullException>()
                     .With.Property("ParamName")
                     .EqualTo(key));
 
-            Assert.That(async () => await _cache.Invalidate<Person>(notExistingKey), 
+            Assert.That(async () => await _cache.Invalidate<Person>(notExistingKey),
                 Throws.Exception
                     .TypeOf<KeyNotFoundException>()
                     .With.Message
                     .EqualTo(key));
 
             var person = new Person() {Name = "john", Age = 19};
-            Assert.That(async () => await _cache.Insert(key, person), 
-		Is.EqualTo(1));
+            Assert.That(async () => await _cache.Insert(key, person),
+                Is.EqualTo(1));
 
-            Assert.That(async () => await _cache.Invalidate<Address>(key), 
+            Assert.That(async () => await _cache.Invalidate<Address>(key),
                 Throws.TypeOf<TypeMismatchException>());
 
-	    var deleted = await _cache.Invalidate<Person>(key);
-	    Assert.That(deleted, Is.EqualTo(1));
+            var deleted = await _cache.Invalidate<Person>(key);
+            Assert.That(deleted, Is.EqualTo(1));
 
-	    Assert.That(async () => await _cache.Get<Person>(key),
+            Assert.That(async () => await _cache.Get<Person>(key),
                 Throws.Exception
                     .TypeOf<KeyNotFoundException>()
                     .With.Message
                     .EqualTo(key));
         }
 
-	[Test]
+        [Test]
         public async Task InvalidateAll()
         {
             var peopleChallenge = new List<Person>()
@@ -228,8 +229,8 @@ namespace Amica.vNext.SimpleCache.Tests
                 new Person {Name = "john", Age = 10},
                 new Person {Name = "mike", Age = 20}
             };
-            await _cache.Insert("john", peopleChallenge[0]); 
-            await _cache.Insert("mike", peopleChallenge[1]); 
+            await _cache.Insert("john", peopleChallenge[0]);
+            await _cache.Insert("mike", peopleChallenge[1]);
 
             var addressChallenge = new List<Address>()
             {
@@ -237,10 +238,10 @@ namespace Amica.vNext.SimpleCache.Tests
                 new Address {Street = "Junction"},
                 new Address {Street = "Grand Station"},
             };
-            await _cache.Insert("address1", addressChallenge[0]); 
-            await _cache.Insert("address2", addressChallenge[1]); 
-            await _cache.Insert("address3", addressChallenge[2]); 
-	    
+            await _cache.Insert("address1", addressChallenge[0]);
+            await _cache.Insert("address2", addressChallenge[1]);
+            await _cache.Insert("address3", addressChallenge[2]);
+
 
             var deleted = await _cache.InvalidateAll<Person>();
             Assert.That(deleted, Is.EqualTo(2));
@@ -253,27 +254,45 @@ namespace Amica.vNext.SimpleCache.Tests
             var addresses = returnedAddresses as IList<Address> ?? returnedAddresses.ToList();
 
             Assert.That(addresses.Count(), Is.EqualTo(expectedCount));
-	    for (var i = 0; i < expectedCount; i++)
-	    {
-	        Assert.That(addresses[i].Street, Is.EqualTo(addressChallenge[i].Street));
-	    }
+            for (var i = 0; i < expectedCount; i++)
+            {
+                Assert.That(addresses[i].Street, Is.EqualTo(addressChallenge[i].Street));
+            }
         }
 
-    }
+        [Test]
+        public async Task Vacuum()
+        {
 
-    class Person
-    {
-        public string Name { get; set; }
-        public int Age { get; set; }
-    }
+            const string vacuumMeKey1 = "key1";
+            const string vacuumMeKey2 = "key2";
+            const string doNotVacuumMeKey = "key3";
 
-    class Address
-    {
-        public string Street { get; set; }
-    }
+            Assert.That(async () => await _cache.Vacuum(), Is.EqualTo(0));
 
-    class Other
-    {
-        public string Nil { get; set; }
+            var person = new Person() {Name = "john", Age = 19};
+            await _cache.Insert(vacuumMeKey1, person, DateTime.Now);
+            await _cache.Insert(vacuumMeKey2, person, DateTime.Now.AddSeconds(-1));
+            await _cache.Insert(doNotVacuumMeKey, person, DateTime.Now.AddSeconds(1));
+
+            Assert.That(async () => await _cache.Vacuum(), Is.EqualTo(2));
+
+        }
+
+        private class Person
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+        }
+
+        private class Address
+        {
+            public string Street { get; set; }
+        }
+
+        // ReSharper disable once ClassNeverInstantiated.Local
+        private class Other
+        {
+        }
     }
 }

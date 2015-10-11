@@ -52,13 +52,6 @@ namespace Amica.vNext.SimpleCache
 	/// <returns>The number of objects deleted from the cache.</returns>
         Task<int> InvalidateAll<T>();
 
-        /// <summary>
-        /// This method eagerly removes all expired keys from the blob cache, as
-        /// well as does any cleanup operations that makes sense (Hint: on SQLite3
-        /// it does a Vacuum)
-        /// </summary>
-        Task Vacuum();
-
 	/// <summary>
         /// Returns the time that the key was added to the cache, or returns 
         /// null if the key isn't in the cache.
@@ -66,6 +59,14 @@ namespace Amica.vNext.SimpleCache
         /// <param name="key">The key to return the date for.</param>
         /// <returns>The date the key was created on.</returns>
         Task<DateTimeOffset?> GetCreatedAt(string key);
+
+        /// <summary>
+        /// This method eagerly removes all expired keys from the blob cache, as
+        /// well as does any cleanup operations that makes sense (Hint: on SQLite3
+        /// it does a Vacuum)
+        /// </summary>
+	/// <returns>The number of disposed cache items.</returns>
+        Task<int> Vacuum();
 
     }
 

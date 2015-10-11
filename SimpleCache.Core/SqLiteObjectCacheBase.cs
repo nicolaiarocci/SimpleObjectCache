@@ -169,9 +169,17 @@ namespace Amica.vNext.SimpleCache
             return await conn.ExecuteAsync($"DELETE FROM CacheElement WHERE TypeName = '{typeName}'");
         }
 
-        public Task Vacuum()
+        public async Task<int> Vacuum()
         {
-            throw new NotImplementedException();
+            var conn = GetConnection();
+
+
+            var challenge = DateTime.UtcNow.Ticks;
+            var deleted = await conn.ExecuteAsync($"DELETE FROM CacheElement WHERE Expiration < {challenge}");
+
+            await conn.ExecuteAsync("VACUUM");
+
+            return deleted;
         }
 
         public void Dispose()
