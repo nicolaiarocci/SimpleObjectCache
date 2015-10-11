@@ -7,7 +7,6 @@ using NUnit.Framework;
 using SQLite;
 
 // ReSharper disable once CheckNamespace
-
 namespace Amica.vNext.SimpleCache.Tests
 {
     [TestFixture]

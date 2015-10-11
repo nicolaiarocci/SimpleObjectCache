@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Amica.vNext.SimpleCache
 {
-    public class SqliteObjectCache : SqLiteObjectCacheBase
+    public class SqliteObjectCache : SqliteObjectCacheBase
     {
         protected override string GetDatabasePath()
         {

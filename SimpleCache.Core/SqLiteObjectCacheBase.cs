@@ -13,7 +13,7 @@ using Newtonsoft.Json.Bson;
 namespace Amica.vNext.SimpleCache
 {
 
-    public abstract class SqLiteObjectCacheBase : IObjectCache
+    public abstract class SqliteObjectCacheBase : IObjectCache
     {
         private static SQLiteAsyncConnection _connection;
         private string _applicationName;
