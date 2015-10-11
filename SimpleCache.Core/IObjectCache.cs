@@ -71,7 +71,7 @@ namespace Amica.vNext.SimpleCache
         /// </summary>
         /// <param name="key">The key to return the date for.</param>
         /// <returns>The date the key was created on.</returns>
-        Task<DateTimeOffset?> GetCreatedAt<T>(string key);
+        Task<DateTimeOffset?> GetCreatedAt(string key);
 
     }
 

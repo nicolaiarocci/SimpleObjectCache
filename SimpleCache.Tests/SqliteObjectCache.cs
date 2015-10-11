@@ -121,25 +121,21 @@ namespace Amica.vNext.SimpleCache.Tests
             const string key = "key";
             const string notExistingKey = "unkey";
 
-            Assert.That(async () => await _cache.Get<Person>(null),
+            Assert.That(async () => await _cache.GetCreatedAt(null),
                 Throws.Exception
                     .TypeOf<ArgumentNullException>()
                     .With.Property("ParamName")
-                    .EqualTo(key));
-
-            Assert.That(async () => await _cache.Get<Person>(notExistingKey),
-                Throws.Exception
-                    .TypeOf<KeyNotFoundException>()
-                    .With.Message
                     .EqualTo(key));
 
             var person = new Person() {Name = "john", Age = 19};
             Assert.That(async () => await _cache.Insert(key, person), 
 		Is.EqualTo(1));
 
-            var restoredPerson = await _cache.Get<Person>(key);
-            Assert.That(restoredPerson.Name, Is.EqualTo(person.Name));
-            Assert.That(restoredPerson.Age, Is.EqualTo(person.Age));
+            var createdAt = await _cache.GetCreatedAt(key);
+            Assert.That(createdAt.Value.UtcDateTime, Is.EqualTo(DateTimeOffset.Now.UtcDateTime).Within(1).Seconds);
+
+            Assert.That(async () => await _cache.GetCreatedAt(notExistingKey), 
+		Is.Null);
         }
 
         [Test]

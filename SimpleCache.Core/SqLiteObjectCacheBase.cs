@@ -100,21 +100,15 @@ namespace Amica.vNext.SimpleCache
             return DeserializeObject<T>(element.Value);
         }
 
-        public async Task<DateTimeOffset?> GetCreatedAt<T>(string key)
+        public async Task<DateTimeOffset?> GetCreatedAt(string key)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
 
             var conn = GetConnection();
 
             var element = await conn.FindAsync<CacheElement>(key);
-            if (element == null)
-                return null;
 
-            var typeName = typeof (T).FullName;
-            if (typeName != element.TypeName)
-                throw new TypeMismatchException();
-
-	    return element.CreatedAt;
+            return element?.CreatedAt;
         }
 
         public async Task<IEnumerable<T>> GetAll<T>()

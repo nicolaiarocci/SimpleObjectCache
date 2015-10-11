@@ -11,6 +11,6 @@ namespace Amica.vNext.SimpleCache
 	public string TypeName { get; set; }
         public byte[] Value { get; set; }
 	public DateTime? Expiration { get; set; }
-	public DateTime CreatedAt { get; set; }
+	public DateTimeOffset CreatedAt { get; set; }
     }
 }
