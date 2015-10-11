@@ -49,7 +49,7 @@ namespace Amica.vNext.SimpleCache.Tests
 
             Assert.That(() => _cache.ApplicationName,
                 Throws.Exception
-                    .TypeOf<Exception>()
+                    .TypeOf<ApplicationNameNullException>()
                     .With.Message.EqualTo("Make sure to set ApplicationName on startup"));
 
             _cache.ApplicationName = AppName;

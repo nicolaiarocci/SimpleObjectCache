@@ -27,7 +27,7 @@ namespace Amica.vNext.SimpleCache
             get
             {
                 if (_applicationName == null)
-                    throw new Exception("Make sure to set ApplicationName on startup");
+                    throw new ApplicationNameNullException();
 
                 return _applicationName;
             }
