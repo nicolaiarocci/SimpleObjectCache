@@ -174,11 +174,6 @@ namespace Amica.vNext.SimpleCache
             throw new NotImplementedException();
         }
 
-        public Task Flush()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Dispose()
         {
                 _connection = null;

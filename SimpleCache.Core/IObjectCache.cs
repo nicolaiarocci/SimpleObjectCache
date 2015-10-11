@@ -59,12 +59,6 @@ namespace Amica.vNext.SimpleCache
         /// </summary>
         Task Vacuum();
 
-        /// <summary>
-        /// This method guarantees that all in-flight inserts have completed
-        /// and any indexes have been written to disk.
-        /// </summary>
-        Task Flush();
-
 	/// <summary>
         /// Returns the time that the key was added to the cache, or returns 
         /// null if the key isn't in the cache.
