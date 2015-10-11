@@ -277,6 +277,15 @@ namespace Amica.vNext.SimpleCache.Tests
 
             Assert.That(async () => await _cache.Vacuum(), Is.EqualTo(2));
 
+            Assert.That(async () => await _cache.Get<Person>(vacuumMeKey1),
+                Throws.Exception
+		.TypeOf<KeyNotFoundException>());
+
+            Assert.That(async () => await _cache.Get<Person>(vacuumMeKey2),
+                Throws.Exception.
+		TypeOf<KeyNotFoundException>());
+
+            Assert.That(async () => await _cache.Get<Person>(doNotVacuumMeKey), Is.Not.Null);
         }
 
         private class Person
