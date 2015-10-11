@@ -70,7 +70,7 @@ namespace Amica.vNext.SimpleCache
 
     }
 
-    public interface IObjectsCache : IObjectCache
+    public interface IBulkObjectCache : IObjectCache
     {
         /// <summary>
         /// Get several objects from the cache and deserialize it via the JSON
