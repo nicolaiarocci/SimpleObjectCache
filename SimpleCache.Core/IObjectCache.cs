@@ -74,7 +74,8 @@ namespace Amica.vNext.SimpleCache
     {
         /// <summary>
         /// Get several objects from the cache and deserialize it via the JSON
-        /// serializer.
+        /// serializer. Eventual missing keys will be ignored and no exception
+        /// will be raised.
         /// </summary>
         /// <param name="keys">The key to look up in the cache.</param>
         /// <returns>The objects in the cache.</returns>

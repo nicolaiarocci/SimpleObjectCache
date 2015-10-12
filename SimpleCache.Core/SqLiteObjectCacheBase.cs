@@ -13,7 +13,7 @@ using Newtonsoft.Json.Bson;
 namespace Amica.vNext.SimpleCache
 {
 
-    public abstract class SqliteObjectCacheBase : IObjectCache
+    public abstract class SqliteObjectCacheBase : IBulkObjectCache
     {
         private static SQLiteAsyncConnection _connection;
         private string _applicationName;
@@ -210,6 +210,36 @@ namespace Amica.vNext.SimpleCache
         public void Dispose()
         {
                 _connection = null;
+        }
+
+        public async Task<IDictionary<string, T>> Get<T>(IEnumerable<string> keys)
+        {
+            var results = new Dictionary<string, T>();
+            foreach (var key in keys)
+            {
+                try
+                {
+                    var result = await Get<T>(key);
+                    results.Add(key, result);
+                }
+		catch (KeyNotFoundException) { }
+            }
+            return results;
+        }
+
+        public Task<int> Insert<T>(IDictionary<string, T> keyValuePairs, DateTimeOffset? absoluteExpiration = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> Invalidate<T>(IEnumerable<string> keys)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IDictionary<string, DateTimeOffset?>> GetCreatedAt(IEnumerable<string> keys)
+        {
+            throw new NotImplementedException();
         }
     }
 }

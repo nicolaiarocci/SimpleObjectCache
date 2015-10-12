@@ -93,7 +93,7 @@ namespace Amica.vNext.SimpleCache.Tests
             const string key = "key";
             const string notExistingKey = "unkey";
 
-            Assert.That(async () => await _cache.Get<Person>(null),
+            Assert.That(async () => await _cache.Get<Person>(key:null),
                 Throws.Exception
                     .TypeOf<ArgumentNullException>()
                     .With.Property("ParamName")
@@ -121,7 +121,7 @@ namespace Amica.vNext.SimpleCache.Tests
             const string key = "key";
             const string notExistingKey = "unkey";
 
-            Assert.That(async () => await _cache.GetCreatedAt(null),
+            Assert.That(async () => await _cache.GetCreatedAt(key:null),
                 Throws.Exception
                     .TypeOf<ArgumentNullException>()
                     .With.Property("ParamName")
@@ -191,7 +191,7 @@ namespace Amica.vNext.SimpleCache.Tests
             const string key = "key";
             const string notExistingKey = "unkey";
 
-            Assert.That(async () => await _cache.Invalidate<Person>(null),
+            Assert.That(async () => await _cache.Invalidate<Person>(key:null),
                 Throws.Exception
                     .TypeOf<ArgumentNullException>()
                     .With.Property("ParamName")
@@ -285,6 +285,34 @@ namespace Amica.vNext.SimpleCache.Tests
 		TypeOf<KeyNotFoundException>());
 
             Assert.That(async () => await _cache.Get<Person>(doNotVacuumMeKey), Is.Not.Null);
+        }
+
+	[Test]
+        public async Task GetBulk()
+	{
+
+
+	    var keys = new List<string> {"key1", "key2", "badkey"};
+
+            var persons = new Person[]
+            {
+                new Person { Name = "john", Age = 19 },
+		new Person {Name = "mike", Age = 30 } 
+            };
+            Assert.That(async () => await _cache.Insert(keys[0], persons[0]),
+                Is.EqualTo(1));
+            Assert.That(async () => await _cache.Insert(keys[1], persons[1]),
+                Is.EqualTo(1));
+
+            var returnedPersons = await _cache.Get<Person>(keys);
+
+            const int expectedCount = 2;
+
+            Assert.That(returnedPersons.Count(), Is.EqualTo(expectedCount));
+            Assert.That(persons[0].Name, Is.EqualTo(returnedPersons[keys[0]].Name));
+            Assert.That(persons[0].Age, Is.EqualTo(returnedPersons[keys[0]].Age));
+            Assert.That(persons[1].Name, Is.EqualTo(returnedPersons[keys[1]].Name));
+            Assert.That(persons[1].Age, Is.EqualTo(returnedPersons[keys[1]].Age));
         }
 
         private class Person
