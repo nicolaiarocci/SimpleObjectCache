@@ -325,13 +325,43 @@ namespace Amica.vNext.SimpleCache.Tests
 	    };
 
             const int expectedCount = 2;
-            Assert.That(async () => await _cache.Insert(persons, DateTimeOffset.Now),
+            Assert.That(async () => await _cache.Insert(persons),
                 Is.EqualTo(expectedCount));
 
 	    var keys = new List<string> {"key1", "key2", "badkey"};
 
             var invalidated = await _cache.Invalidate<Person>(keys);
             Assert.That(invalidated, Is.EqualTo(2));
+        }
+
+        [Test]
+        public async Task GetCreatedAtBulk()
+        {
+	    var persons = new Dictionary<string, Person>()
+	    {
+	        {"key1", new Person {Name = "john", Age = 19}},
+	        {"key2", new Person {Name = "mike", Age = 30}},
+	    };
+
+            const int expectedCount = 2;
+            Assert.That(async () => await _cache.Insert(persons),
+                Is.EqualTo(expectedCount));
+
+	    var keys = new List<string> {"key1", "key2", "key3"};
+
+            var results = await _cache.GetCreatedAt(keys);
+            Assert.That(results.Count, Is.EqualTo(3));
+
+	    for (var i = 1; i <= 3; i++)
+	    {
+	        var key = $"key{i}";
+	        var dateTimeOffset = results[key];
+	        if (dateTimeOffset != null)
+	            Assert.That(dateTimeOffset.Value.UtcDateTime,
+	                Is.EqualTo(DateTimeOffset.Now.UtcDateTime).Within(1).Seconds);
+	        else
+	            Assert.That(key, Is.EqualTo("key3"));
+	    }
         }
 
         private class Person

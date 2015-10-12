@@ -251,9 +251,14 @@ namespace Amica.vNext.SimpleCache
             return invalidated;
         }
 
-        public Task<IDictionary<string, DateTimeOffset?>> GetCreatedAt(IEnumerable<string> keys)
+        public async Task<IDictionary<string, DateTimeOffset?>> GetCreatedAt(IEnumerable<string> keys)
         {
-            throw new NotImplementedException();
+            var results = new Dictionary<string, DateTimeOffset?>();
+            foreach (var key in keys)
+            {
+                results.Add(key, await GetCreatedAt(key));
+            }
+            return results;
         }
     }
 }
