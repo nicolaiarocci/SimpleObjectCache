@@ -3,17 +3,17 @@ using System.IO;
 
 namespace Amica.vNext.SimpleCache
 {
-    public class SqliteObjectCache : SqliteObjectCacheBase
-    {
-        protected override string GetDatabasePath()
-        {
-            const string sqliteFilename = "cache.db3";
-            var cacheFolder = Path.Combine(ApplicationName, "SimpleCache");
+	public class SqliteObjectCache : SqliteObjectCacheBase
+	{
+		protected override string GetDatabasePath ()
+		{
+			const string sqliteFilename = "cache.db3";
+			var cacheFolder = Path.Combine (ApplicationName, "SimpleCache");
 
-            var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), cacheFolder);
-            Directory.CreateDirectory(dir);
-            var path = Path.Combine(dir, sqliteFilename);
-            return path;
-        }
-    }
-}
+			string documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal); 
+			string cachePath = Path.Combine (documentsPath, "..", "Library", cacheFolder); 
+			Directory.CreateDirectory (cachePath);
+			return Path.Combine (cachePath, sqliteFilename);
+
+		}
+	}
