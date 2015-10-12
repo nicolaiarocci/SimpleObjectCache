@@ -288,33 +288,32 @@ namespace Amica.vNext.SimpleCache.Tests
         }
 
 	[Test]
-        public async Task GetBulk()
+        public async Task InsertAndGetBulk()
 	{
 
-
-	    var keys = new List<string> {"key1", "key2", "badkey"};
-
-            var persons = new Person[]
-            {
-                new Person { Name = "john", Age = 19 },
-		new Person {Name = "mike", Age = 30 } 
-            };
-            Assert.That(async () => await _cache.Insert(keys[0], persons[0]),
-                Is.EqualTo(1));
-            Assert.That(async () => await _cache.Insert(keys[1], persons[1]),
-                Is.EqualTo(1));
-
-            var returnedPersons = await _cache.Get<Person>(keys);
+	    var persons = new Dictionary<string, Person>()
+	    {
+	        {"key1", new Person {Name = "john", Age = 19}},
+	        {"key2", new Person {Name = "mike", Age = 30}},
+	    };
 
             const int expectedCount = 2;
+            Assert.That(async () => await _cache.Insert(persons, DateTimeOffset.Now),
+                Is.EqualTo(expectedCount));
 
+	    var keys = new List<string> {"key1", "key2", "badkey"};
+            var returnedPersons = await _cache.Get<Person>(keys);
+
+	    // bad key has been ignored
             Assert.That(returnedPersons.Count(), Is.EqualTo(expectedCount));
-            Assert.That(persons[0].Name, Is.EqualTo(returnedPersons[keys[0]].Name));
-            Assert.That(persons[0].Age, Is.EqualTo(returnedPersons[keys[0]].Age));
-            Assert.That(persons[1].Name, Is.EqualTo(returnedPersons[keys[1]].Name));
-            Assert.That(persons[1].Age, Is.EqualTo(returnedPersons[keys[1]].Age));
-        }
 
+	    for (var i = 1; i <= expectedCount; i++)
+	    {
+	        var key = $"key{i}";
+	        Assert.That(persons[key].Name, Is.EqualTo(returnedPersons[key].Name));
+	        Assert.That(persons[key].Age, Is.EqualTo(returnedPersons[key].Age));
+	    }
+        }
         private class Person
         {
             public string Name { get; set; }

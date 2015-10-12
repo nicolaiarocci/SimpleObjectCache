@@ -227,9 +227,14 @@ namespace Amica.vNext.SimpleCache
             return results;
         }
 
-        public Task<int> Insert<T>(IDictionary<string, T> keyValuePairs, DateTimeOffset? absoluteExpiration = null)
+        public async Task<int> Insert<T>(IDictionary<string, T> keyValuePairs, DateTimeOffset? absoluteExpiration = null)
         {
-            throw new NotImplementedException();
+            var inserted = 0;
+            foreach (var keyValuePair in keyValuePairs)
+            {
+                inserted = inserted + await Insert(keyValuePair.Key, keyValuePair.Value, absoluteExpiration);
+            }
+            return inserted;
         }
 
         public Task<int> Invalidate<T>(IEnumerable<string> keys)
