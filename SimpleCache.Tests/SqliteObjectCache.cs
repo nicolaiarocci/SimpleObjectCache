@@ -288,7 +288,7 @@ namespace Amica.vNext.SimpleCache.Tests
         }
 
 	[Test]
-        public async Task InsertAndGetBulk()
+        public async Task BulkInsertAndGet()
 	{
 
 	    var persons = new Dictionary<string, Person>()
@@ -316,7 +316,7 @@ namespace Amica.vNext.SimpleCache.Tests
         }
 
         [Test]
-        public async Task InvalidateBulk()
+        public async Task BulkInvalidate()
         {
 	    var persons = new Dictionary<string, Person>()
 	    {
@@ -335,7 +335,7 @@ namespace Amica.vNext.SimpleCache.Tests
         }
 
         [Test]
-        public async Task GetCreatedAtBulk()
+        public async Task BulkGetCreatedAt()
         {
 	    var persons = new Dictionary<string, Person>()
 	    {
@@ -364,6 +364,51 @@ namespace Amica.vNext.SimpleCache.Tests
 	    }
         }
 
+
+	[Test]
+        public async Task BulkInsertAbsoluteExpiration()
+        {
+
+            Assert.That(async () => await _cache.Vacuum(), Is.EqualTo(0));
+
+	    var persons = new Dictionary<string, Person>()
+	    {
+	        {"key1", new Person {Name = "john", Age = 19}},
+	        {"key2", new Person {Name = "mike", Age = 30}},
+	    };
+            await _cache.Insert(persons, DateTime.Now);
+
+	    persons = new Dictionary<string, Person>()
+	    {
+	        {"key3", new Person {Name = "john", Age = 19}},
+	        {"key4", new Person {Name = "mike", Age = 30}},
+	    };
+            await _cache.Insert(persons, DateTime.Now.AddMinutes(-1));
+
+	    persons = new Dictionary<string, Person>()
+	    {
+	        {"key5", new Person {Name = "john", Age = 19}},
+	        {"key6", new Person {Name = "mike", Age = 30}},
+	    };
+            await _cache.Insert(persons, DateTime.Now.AddMinutes(1));
+
+            Assert.That(async () => await _cache.Vacuum(), Is.EqualTo(4));
+
+	    var keys = new List<string> {"key1", "key2", "key3", "key4"};
+	    var returnedPersons = await _cache.Get<Person>(keys);
+	    Assert.That(returnedPersons, Is.Empty);
+
+	    keys = new List<string> {"key5", "key6"};
+	    var expectedCount = 2;
+	    returnedPersons = await _cache.Get<Person>(keys);
+	    Assert.That(returnedPersons.Count, Is.EqualTo(2));
+	    for (var i = 0; i < expectedCount; i++)
+	    {
+                Assert.That(returnedPersons[keys[i]].Name, Is.EqualTo(persons[keys[i]].Name));
+                Assert.That(returnedPersons[keys[i]].Age, Is.EqualTo(persons[keys[i]].Age));
+	    }
+
+        }
         private class Person
         {
             public string Name { get; set; }
