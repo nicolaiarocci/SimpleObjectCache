@@ -92,7 +92,8 @@ namespace Amica.vNext.SimpleCache
 
         /// <summary>
         /// Invalidates several objects from the cache. It is important that the Type
-        /// Parameter for this method be correct.
+        /// Parameter for this method be correct. Eventual missing keys will be ignored
+        /// and no KeyNotFoundException will be raised.
         /// </summary>
         /// <param name="keys">The key to invalidate.</param>
 	/// <returns>The number of objects deleted.</returns>

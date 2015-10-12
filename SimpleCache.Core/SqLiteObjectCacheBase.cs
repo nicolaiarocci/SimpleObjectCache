@@ -232,14 +232,23 @@ namespace Amica.vNext.SimpleCache
             var inserted = 0;
             foreach (var keyValuePair in keyValuePairs)
             {
-                inserted = inserted + await Insert(keyValuePair.Key, keyValuePair.Value, absoluteExpiration);
+                inserted += await Insert(keyValuePair.Key, keyValuePair.Value, absoluteExpiration);
             }
             return inserted;
         }
 
-        public Task<int> Invalidate<T>(IEnumerable<string> keys)
+        public async Task<int> Invalidate<T>(IEnumerable<string> keys)
         {
-            throw new NotImplementedException();
+            var invalidated = 0;
+            foreach (var key in keys)
+            {
+                try
+                {
+                    invalidated += await Invalidate<T>(key);
+                }
+                catch (KeyNotFoundException) { }
+            }
+            return invalidated;
         }
 
         public Task<IDictionary<string, DateTimeOffset?>> GetCreatedAt(IEnumerable<string> keys)

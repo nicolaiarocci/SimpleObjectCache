@@ -314,6 +314,26 @@ namespace Amica.vNext.SimpleCache.Tests
 	        Assert.That(persons[key].Age, Is.EqualTo(returnedPersons[key].Age));
 	    }
         }
+
+        [Test]
+        public async Task InvalidateBulk()
+        {
+	    var persons = new Dictionary<string, Person>()
+	    {
+	        {"key1", new Person {Name = "john", Age = 19}},
+	        {"key2", new Person {Name = "mike", Age = 30}},
+	    };
+
+            const int expectedCount = 2;
+            Assert.That(async () => await _cache.Insert(persons, DateTimeOffset.Now),
+                Is.EqualTo(expectedCount));
+
+	    var keys = new List<string> {"key1", "key2", "badkey"};
+
+            var invalidated = await _cache.Invalidate<Person>(keys);
+            Assert.That(invalidated, Is.EqualTo(2));
+        }
+
         private class Person
         {
             public string Name { get; set; }
