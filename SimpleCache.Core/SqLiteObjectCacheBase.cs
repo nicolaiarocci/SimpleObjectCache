@@ -87,6 +87,31 @@ namespace Amica.vNext.SimpleCache
 	    return ms.ToArray();
 	}
 
+        /// <summary>
+        /// This method is called immediately before writing any data to disk.
+        /// Override this in encrypting data stores in order to encrypt the
+        /// data.
+        /// </summary>
+        /// <param name="data">The byte data about to be written to disk.</param>
+        /// <returns>A result representing the encrypted data</returns>
+        protected virtual byte[] BeforeWriteToDiskFilter(byte[] data)
+        {
+            return data;
+        }
+
+        /// <summary>
+        /// This method is called immediately after reading any data to disk.
+        /// Override this in encrypting data stores in order to decrypt the
+        /// data.
+        /// </summary>
+        /// <param name="data">The byte data that has just been read from
+        /// disk.</param>
+        /// <returns>A result representing the decrypted data</returns>
+        protected virtual byte[] AfterReadFromDiskFilter(byte[] data)
+        {
+            return data;
+        }
+
         public async Task<T> Get<T>(string key)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
@@ -97,7 +122,7 @@ namespace Amica.vNext.SimpleCache
             if (element == null)
                 throw new KeyNotFoundException(nameof(key));
 
-            return DeserializeObject<T>(element.Value);
+            return DeserializeObject<T>(AfterReadFromDiskFilter(element.Value));
         }
 
         public async Task<DateTimeOffset?> GetCreatedAt(string key)
@@ -119,7 +144,7 @@ namespace Amica.vNext.SimpleCache
             var elements = new List<T>();
             await query.ToListAsync().ContinueWith(t =>
             {
-                elements.AddRange(t.Result.Select(element => DeserializeObject<T>(element.Value)));
+                elements.AddRange(t.Result.Select(element => DeserializeObject<T>(AfterReadFromDiskFilter(element.Value))));
             }
 	    );
             return elements.AsEnumerable();
@@ -129,7 +154,7 @@ namespace Amica.vNext.SimpleCache
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
 
-            var data = SerializeObject(value);
+            var data = BeforeWriteToDiskFilter(SerializeObject(value));
             var exp = (absoluteExpiration ?? DateTimeOffset.MaxValue).UtcDateTime;
             var createdAt = DateTimeOffset.Now.UtcDateTime;
 
