@@ -10,10 +10,10 @@ namespace Amica.vNext.SimpleCache
             const string sqliteFilename = "cache.db3";
             var cacheFolder = Path.Combine(ApplicationName, "SimpleCache");
 
-            var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), cacheFolder);
-            Directory.CreateDirectory(dir);
-            var path = Path.Combine(dir, sqliteFilename);
-            return path;
+            var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            var cachePath = Path.Combine(documentsPath, "..", "Library", cacheFolder);
+            Directory.CreateDirectory(cachePath);
+            return Path.Combine(cachePath, sqliteFilename);
         }
     }
 }
