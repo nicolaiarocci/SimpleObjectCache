@@ -2,6 +2,7 @@
 Asynchronous, permanent and cross-platform key-value object cache powered by SQLite3.
 
 ## Usage
+```C#
     /* First you need to set ApplicatioName.
        This is also the folder where your cache will reside.
        Depending on the host OS the location of this folder
@@ -49,8 +50,8 @@ Asynchronous, permanent and cross-platform key-value object cache powered by SQL
     // back, and that's our very own john.
     Assert.That(returnedPersons.Count(), Is.EqualTo(1));
     Assert.That(returnedPersons[0].Name, Is.EqualTo(john.Name));
-
-Note the all methods are Async, even if they don't have the suffix (it's a 100% async library anyway). 
+```
+Note that all methods are Async, even if they don't have the suffix (it's a 100% async library anyway). 
 
 ## Supported systems
 iOS, .NET4, .NET45. Android is planned (or you can add it yourself!).
