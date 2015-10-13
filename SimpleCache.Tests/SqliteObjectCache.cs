@@ -58,8 +58,6 @@ namespace Amica.vNext.SimpleCache.Tests
         [Test]
         public async Task Insert()
         {
-
-
             const string key = "key";
 
             Assert.That(async () => await _cache.Insert(null, "value"),
