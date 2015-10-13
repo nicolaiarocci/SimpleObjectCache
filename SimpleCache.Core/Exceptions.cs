@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Amica.vNext.SimpleCache
+namespace Amica.vNext
 {
-    class ApplicationNameNullException : Exception
+    class SimpleCacheApplicationNameNullException : Exception
     {
         public override string Message => "Make sure to set ApplicationName on startup";
     }
-    class TypeMismatchException : Exception
+    class SimpleCacheTypeMismatchException : Exception
     {
     }
 }

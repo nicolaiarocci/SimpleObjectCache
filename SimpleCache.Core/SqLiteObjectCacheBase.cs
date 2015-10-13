@@ -15,7 +15,7 @@ using Newtonsoft.Json.Bson;
  "877b75f02109d3e3a54b5eb87d29f180417bd2a03384cbb3b9692df63161313dc770682e7fb81"+
  "14e8cf5120cdfb2")]
 
-namespace Amica.vNext.SimpleCache
+namespace Amica.vNext
 {
 
     public abstract class SqliteObjectCacheBase : IBulkObjectCache
@@ -32,7 +32,7 @@ namespace Amica.vNext.SimpleCache
             get
             {
                 if (_applicationName == null)
-                    throw new ApplicationNameNullException();
+                    throw new SimpleCacheApplicationNameNullException();
 
                 return _applicationName;
             }
@@ -186,7 +186,7 @@ namespace Amica.vNext.SimpleCache
 
             var typeName = typeof (T).FullName;
             if (element.TypeName != typeName)
-                throw new TypeMismatchException();
+                throw new SimpleCacheTypeMismatchException();
 
             return await conn.DeleteAsync(element);
         }

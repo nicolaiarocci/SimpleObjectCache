@@ -7,15 +7,15 @@ using NUnit.Framework;
 using SQLite;
 
 // ReSharper disable once CheckNamespace
-namespace Amica.vNext.SimpleCache.Tests
+namespace Amica.vNext
 {
     [TestFixture]
-    internal class SqliteObjectCache
+    internal class SqliteObjectCacheTest
     {
         private string _expectedDatabasePath;
         private const string AppName = "test";
 
-        private readonly SimpleCache.SqliteObjectCache _cache = new SimpleCache.SqliteObjectCache();
+        private readonly SqliteObjectCache _cache = new SqliteObjectCache();
         private SQLiteConnection _connection;
 
         [SetUp]
@@ -48,7 +48,7 @@ namespace Amica.vNext.SimpleCache.Tests
 
             Assert.That(() => _cache.ApplicationName,
                 Throws.Exception
-                    .TypeOf<ApplicationNameNullException>()
+                    .TypeOf<SimpleCacheApplicationNameNullException>()
                     .With.Message.EqualTo("Make sure to set ApplicationName on startup"));
 
             _cache.ApplicationName = AppName;
@@ -206,7 +206,7 @@ namespace Amica.vNext.SimpleCache.Tests
                 Is.EqualTo(1));
 
             Assert.That(async () => await _cache.Invalidate<Address>(key),
-                Throws.TypeOf<TypeMismatchException>());
+                Throws.TypeOf<SimpleCacheTypeMismatchException>());
 
             var deleted = await _cache.Invalidate<Person>(key);
             Assert.That(deleted, Is.EqualTo(1));
@@ -356,7 +356,7 @@ namespace Amica.vNext.SimpleCache.Tests
 	        var dateTimeOffset = results[key];
 	        if (dateTimeOffset != null)
 	            Assert.That(dateTimeOffset.Value.UtcDateTime,
-	                Is.EqualTo(DateTimeOffset.Now.UtcDateTime).Within(1).Seconds);
+	                Is.EqualTo(DateTimeOffset.Now.UtcDateTime).Within(2).Seconds);
 	        else
 	            Assert.That(key, Is.EqualTo("key3"));
 	    }

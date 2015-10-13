@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Amica.vNext.SimpleCache
+namespace Amica.vNext
 {
     public class SqliteObjectCache : SqliteObjectCacheBase
     {

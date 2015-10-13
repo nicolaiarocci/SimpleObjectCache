@@ -1,7 +1,7 @@
 ﻿using System;
 using SQLite;
 
-namespace Amica.vNext.SimpleCache
+namespace Amica.vNext
 {
     class CacheElement
     {

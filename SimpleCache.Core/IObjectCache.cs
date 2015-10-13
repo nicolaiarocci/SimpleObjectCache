@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Amica.vNext.SimpleCache
+namespace Amica.vNext
 {
     /// <summary>
     /// IObjectCache is the core interface on which SimpleCache is built, it is an
