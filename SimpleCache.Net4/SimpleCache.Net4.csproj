@@ -67,24 +67,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SimpleCache.Core\CacheElement.cs">
-      <Link>CacheElement.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\Exceptions.cs">
-      <Link>Exceptions.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\IObjectCache.cs">
-      <Link>IObjectCache.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\SQLite.cs">
-      <Link>SQLite.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\SQLiteAsync.cs">
-      <Link>SQLiteAsync.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\SqliteObjectCacheBase.cs">
-      <Link>SqliteObjectCacheBase.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqliteObjectCache.cs" />
   </ItemGroup>
@@ -93,6 +75,7 @@
     <None Include="packages.config" />
     <None Include="SimpleCache.snk" />
   </ItemGroup>
+  <Import Project="..\SimpleCache.Core\SimpleCache.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

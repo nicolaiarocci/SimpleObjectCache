@@ -49,24 +49,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SimpleCache.Core\CacheElement.cs">
-      <Link>CacheElement.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\Exceptions.cs">
-      <Link>Exceptions.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\IObjectCache.cs">
-      <Link>IObjectCache.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\SQLite.cs">
-      <Link>SQLite.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\SQLiteAsync.cs">
-      <Link>SQLiteAsync.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\SqliteObjectCacheBase.cs">
-      <Link>SqliteObjectCacheBase.cs</Link>
-    </Compile>
     <Compile Include="..\SimpleCache.Net4\SqliteObjectCache.cs">
       <Link>SqliteObjectCache.cs</Link>
     </Compile>
@@ -76,6 +58,7 @@
     <None Include="packages.config" />
     <None Include="SimpleCache.snk" />
   </ItemGroup>
+  <Import Project="..\SimpleCache.Core\SimpleCache.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

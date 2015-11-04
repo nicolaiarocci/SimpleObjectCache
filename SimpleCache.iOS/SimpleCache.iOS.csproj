@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -42,28 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\SimpleCache.Core\CacheElement.cs">
-      <Link>CacheElement.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\Exceptions.cs">
-      <Link>Exceptions.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\IObjectCache.cs">
-      <Link>IObjectCache.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\SQLite.cs">
-      <Link>SQLite.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\SQLiteAsync.cs">
-      <Link>SQLiteAsync.cs</Link>
-    </Compile>
-    <Compile Include="..\SimpleCache.Core\SqLiteObjectCacheBase.cs">
-      <Link>SqLiteObjectCacheBase.cs</Link>
-    </Compile>
     <Compile Include="SqliteObjectCache.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="..\SimpleCache.Core\SimpleCache.Core.projitems" Label="Shared" />
 </Project>
