@@ -72,9 +72,9 @@
     <None Include="SimpleCache.snk" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SimpleCache.Net45\SimpleCache.Net45.csproj">
-      <Project>{0b199775-aa32-4673-8c1f-9ec88754d751}</Project>
-      <Name>SimpleCache.Net45</Name>
+    <ProjectReference Include="..\SimpleCache.Net4\SimpleCache.Net4.csproj">
+      <Project>{5a320348-7ae0-421a-b3ec-25ff8fed4243}</Project>
+      <Name>SimpleCache.Net4</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
