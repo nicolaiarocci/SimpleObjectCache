@@ -22,7 +22,6 @@ namespace Amica.vNext
     {
         private static SQLiteAsyncConnection _connection;
         private string _applicationName;
-
         /// <summary>
         /// Your application's name. Set this at startup, this defines where
         /// your data will be stored (usually at %AppData%\[ApplicationName])
@@ -54,12 +53,12 @@ namespace Amica.vNext
 	/// initialize the database too.
 	/// </summary>
 	/// <returns>An active connection to the cache database.</returns>
-        private SQLiteAsyncConnection GetConnection()
+        private async Task<SQLiteAsyncConnection> GetConnection()
         {
             if (_connection != null) return _connection;
 
             _connection = new SQLiteAsyncConnection(GetDatabasePath(), storeDateTimeAsTicks: true);
-            _connection.CreateTableAsync<CacheElement>();
+            await _connection.CreateTableAsync<CacheElement>().ConfigureAwait(false);
             return _connection;
         }
 
@@ -121,9 +120,9 @@ namespace Amica.vNext
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
 
-            var conn = GetConnection();
+            var conn = await GetConnection().ConfigureAwait(false);
 
-            var element = await conn.FindAsync<CacheElement>(key);
+            var element = await conn.FindAsync<CacheElement>(key).ConfigureAwait(false);
             if (element == null)
                 throw new KeyNotFoundException(nameof(key));
 
@@ -134,7 +133,7 @@ namespace Amica.vNext
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
 
-            var conn = GetConnection();
+            var conn = await GetConnection();
 
             var element = await conn.FindAsync<CacheElement>(key);
 
@@ -143,7 +142,7 @@ namespace Amica.vNext
 
         public async Task<IEnumerable<T>> GetAll<T>()
         {
-            var conn = GetConnection();
+            var conn = await GetConnection();
             var query = conn.Table<CacheElement>().Where(v => v.TypeName == typeof (T).FullName);
 
             var elements = new List<T>();
@@ -163,7 +162,7 @@ namespace Amica.vNext
             var exp = (absoluteExpiration ?? DateTimeOffset.MaxValue).UtcDateTime;
             var createdAt = DateTimeOffset.Now.UtcDateTime;
 
-            var conn = GetConnection();
+            var conn = await GetConnection();
             return await conn.InsertOrReplaceAsync(new CacheElement()
             {
                 Key = key,
@@ -178,7 +177,7 @@ namespace Amica.vNext
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
 
-            var conn = GetConnection();
+            var conn = await GetConnection();
 
             var element = await conn.FindAsync<CacheElement>(key);
             if (element == null)
@@ -193,7 +192,7 @@ namespace Amica.vNext
 
         public async Task<int> InvalidateAll<T>()
         {
-            var conn = GetConnection();
+            var conn = await GetConnection();
 
             var typeName = typeof (T).FullName;
             return await conn.ExecuteAsync($"DELETE FROM CacheElement WHERE TypeName = '{typeName}'");
@@ -201,7 +200,7 @@ namespace Amica.vNext
 
         public async Task<int> Vacuum()
         {
-            var conn = GetConnection();
+            var conn = await GetConnection();
 
 
             var challenge = DateTime.UtcNow.Ticks;
