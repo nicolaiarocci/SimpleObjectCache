@@ -10,6 +10,7 @@ namespace Amica.vNext
     /// </summary>
     public interface IObjectCache : IDisposable
     {
+		string ApplicationName { get; set; }
         /// <summary>
         /// Retrieve an object of type T from the key-value cache. 
         /// </summary>
@@ -21,7 +22,7 @@ namespace Amica.vNext
         /// Retrieve all objects of type T from the key-value cache. 
         /// </summary>
         /// <returns>Objects of type T stored in the cache.</returns>
-	Task<IEnumerable<T>> GetAll<T>();
+		Task<IEnumerable<T>> GetAll<T>();
 
         /// <summary>
         /// Insert an object into the cache, with the specified key and expiration
