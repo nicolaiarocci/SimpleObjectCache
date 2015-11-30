@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using Amica.vNext;
+using SQLite.Net;
+using SQLite.Net.Async;
 
 [assembly: Xamarin.Forms.Dependency(typeof(SqliteObjectCache))]
 
@@ -8,15 +10,21 @@ namespace Amica.vNext
 {
     public class SqliteObjectCache : SqliteObjectCacheBase
     {
-        protected override string GetDatabasePath()
+        protected override SQLiteAsyncConnection GetPlatformConnection()
         {
-            const string sqliteFilename = "cache.db3";
-            var cacheFolder = Path.Combine(ApplicationName, "SimpleCache");
+            var dbPath = Path.Combine(
+				Environment.GetFolderPath(Environment.SpecialFolder.Personal), 
+				Path.Combine(ApplicationName, "SimpleCache"));
 
-            var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            var cachePath = Path.Combine(documentsPath, cacheFolder);
-            Directory.CreateDirectory(cachePath);
-            return Path.Combine(cachePath, sqliteFilename);
+            Directory.CreateDirectory(dbPath);
+
+            var lockedConnection = new SQLiteConnectionWithLock(
+				new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS(), 
+				new SQLiteConnectionString(
+					Path.Combine(dbPath, "cache.db3"), 
+					true));
+
+            return new SQLiteAsyncConnection(() => lockedConnection);
         }
     }
 }
