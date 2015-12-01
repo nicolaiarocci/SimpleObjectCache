@@ -40,21 +40,17 @@ namespace Amica.vNext
         }
 
         /// <summary>
-        /// Returns the appropriate database path according to the operating
-        /// system on which we are running. If the path does not exist yet,
-        /// create it.
+        /// Returns the appropriate platform connection.
         /// </summary>
-        /// <returns>The intended location, filename included, for the cache 
-        /// database.</returns>
-
-        protected abstract SQLiteAsyncConnection GetPlatformConnection();
+        /// <returns>The platform connection.</returns>
+        protected abstract SQLiteAsyncConnection PlatformConnection();
 
 
         private SQLiteAsyncConnection GetConnection()
         {
             if (_connection != null) return _connection;
 
-            _connection = GetPlatformConnection();
+            _connection = PlatformConnection();
 			_connection.CreateTableAsync<CacheElement>().ConfigureAwait(false);
 
             return _connection;

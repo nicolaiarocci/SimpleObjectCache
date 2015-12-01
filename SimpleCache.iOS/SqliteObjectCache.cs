@@ -10,7 +10,7 @@ namespace Amica.vNext
 {
     public class SqliteObjectCache : SqliteObjectCacheBase
     {
-        protected override SQLiteAsyncConnection GetPlatformConnection()
+        protected override SQLiteAsyncConnection PlatformConnection()
         {
             var dbPath = Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.Personal), 
