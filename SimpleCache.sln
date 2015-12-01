@@ -22,6 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCache", "SimpleCache\
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SimpleCache.Core\SimpleCache.Core.projitems*{c4cbe63f-2eb6-404f-9cf2-44fbf42e35e2}*SharedItemsImports = 4
 		SimpleCache.Core\SimpleCache.Core.projitems*{5a320348-7ae0-421a-b3ec-25ff8fed4243}*SharedItemsImports = 4
 		SimpleCache.Core\SimpleCache.Core.projitems*{f0f65631-c26b-4a72-b0a3-4a770383a71b}*SharedItemsImports = 13
 	EndGlobalSection

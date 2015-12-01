@@ -12,8 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)CacheElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IObjectCache.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SQLite.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SQLiteAsync.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SqLiteObjectCacheBase.cs" />
   </ItemGroup>
 </Project>

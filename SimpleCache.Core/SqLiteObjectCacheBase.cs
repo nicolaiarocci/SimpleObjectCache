@@ -4,9 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using SQLite;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
+
+#if __PORTABLE__
+using SQLite.Net.Async;
+#else
+using SQLite;
+#endif
 
 [assembly:InternalsVisibleTo("Tests, PublicKey ="+
  "0024000004800000940000000602000000240000525341310004000001000100c30aa9a63d6e"+
@@ -22,6 +27,7 @@ namespace Amica.vNext
     {
         private static SQLiteAsyncConnection _connection;
         private string _applicationName;
+
         /// <summary>
         /// Your application's name. Set this at startup, this defines where
         /// your data will be stored (usually at %AppData%\[ApplicationName])
@@ -35,39 +41,32 @@ namespace Amica.vNext
 
                 return _applicationName;
             }
-	    set { _applicationName = value; }
+            set { _applicationName = value; }
         }
 
         /// <summary>
-        /// Returns the appropriate database path according to the operating
-        /// system on which we are running. If the path does not exist yet,
-        /// create it.
+        /// Returns the appropriate platform connection.
         /// </summary>
-        /// <returns>The intended location, filename included, for the cache 
-        /// database.</returns>
-        protected abstract string GetDatabasePath();
+        /// <returns>The platform connection.</returns>
+        protected abstract SQLiteAsyncConnection PlatformConnection();
 
 
-	/// <summary>
-	///  Returns an open connection to the cache database. If necessary,
-	/// initialize the database too.
-	/// </summary>
-	/// <returns>An active connection to the cache database.</returns>
-        private async Task<SQLiteAsyncConnection> GetConnection()
+        private SQLiteAsyncConnection GetConnection()
         {
             if (_connection != null) return _connection;
 
-            _connection = new SQLiteAsyncConnection(GetDatabasePath(), storeDateTimeAsTicks: true);
-            await _connection.CreateTableAsync<CacheElement>().ConfigureAwait(false);
+            _connection = PlatformConnection();
+			_connection.CreateTableAsync<CacheElement>().ConfigureAwait(false);
+
             return _connection;
         }
 
-	/// <summary>
-	/// Deserializes a byte array into an object.
-	/// </summary>
-	/// <typeparam name="T">Object type.</typeparam>
-	/// <param name="data">Input array.</param>
-	/// <returns>The object resulting from the deseralization of the input array.</returns>
+        /// <summary>
+        /// Deserializes a byte array into an object.
+        /// </summary>
+        /// <typeparam name="T">Object type.</typeparam>
+        /// <param name="data">Input array.</param>
+        /// <returns>The object resulting from the deseralization of the input array.</returns>
         private static T DeserializeObject<T>(byte[] data)
         {
             var serializer = JsonSerializer.Create();
@@ -120,9 +119,7 @@ namespace Amica.vNext
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
 
-            var conn = await GetConnection().ConfigureAwait(false);
-
-            var element = await conn.FindAsync<CacheElement>(key).ConfigureAwait(false);
+            var element = await GetConnection().FindAsync<CacheElement>(key).ConfigureAwait(false);
             if (element == null)
                 throw new KeyNotFoundException(nameof(key));
 
@@ -133,17 +130,14 @@ namespace Amica.vNext
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
 
-            var conn = await GetConnection();
-
-            var element = await conn.FindAsync<CacheElement>(key);
+            var element = await GetConnection().FindAsync<CacheElement>(key);
 
             return element?.CreatedAt;
         }
 
         public async Task<IEnumerable<T>> GetAll<T>()
         {
-            var conn = await GetConnection();
-            var query = conn.Table<CacheElement>().Where(v => v.TypeName == typeof (T).FullName);
+            var query = GetConnection().Table<CacheElement>().Where(v => v.TypeName == typeof (T).FullName);
 
             var elements = new List<T>();
             await query.ToListAsync().ContinueWith(t =>
@@ -162,8 +156,7 @@ namespace Amica.vNext
             var exp = (absoluteExpiration ?? DateTimeOffset.MaxValue).UtcDateTime;
             var createdAt = DateTimeOffset.Now.UtcDateTime;
 
-            var conn = await GetConnection();
-            return await conn.InsertOrReplaceAsync(new CacheElement()
+            return await GetConnection().InsertOrReplaceAsync(new CacheElement()
             {
                 Key = key,
                 TypeName = typeof (T).FullName,
@@ -177,9 +170,7 @@ namespace Amica.vNext
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
 
-            var conn = await GetConnection();
-
-            var element = await conn.FindAsync<CacheElement>(key);
+            var element = await GetConnection().FindAsync<CacheElement>(key);
             if (element == null)
                 throw new KeyNotFoundException(nameof(key));
 
@@ -187,26 +178,21 @@ namespace Amica.vNext
             if (element.TypeName != typeName)
                 throw new SimpleCacheTypeMismatchException();
 
-            return await conn.DeleteAsync(element);
+            return await GetConnection().DeleteAsync(element);
         }
 
         public async Task<int> InvalidateAll<T>()
         {
-            var conn = await GetConnection();
-
             var typeName = typeof (T).FullName;
-            return await conn.ExecuteAsync($"DELETE FROM CacheElement WHERE TypeName = '{typeName}'");
+            return await GetConnection().ExecuteAsync($"DELETE FROM CacheElement WHERE TypeName = '{typeName}'");
         }
 
         public async Task<int> Vacuum()
         {
-            var conn = await GetConnection();
-
-
             var challenge = DateTime.UtcNow.Ticks;
-            var deleted = await conn.ExecuteAsync($"DELETE FROM CacheElement WHERE Expiration < {challenge}");
+            var deleted = await GetConnection().ExecuteAsync($"DELETE FROM CacheElement WHERE Expiration < {challenge}");
 
-            await conn.ExecuteAsync("VACUUM");
+            await GetConnection().ExecuteAsync("VACUUM");
 
             return deleted;
         }

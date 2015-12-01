@@ -1,5 +1,10 @@
 ﻿using System;
+
+#if __PORTABLE__
+using SQLite.Net.Attributes;
+#else
 using SQLite;
+#endif
 
 namespace Amica.vNext
 {
