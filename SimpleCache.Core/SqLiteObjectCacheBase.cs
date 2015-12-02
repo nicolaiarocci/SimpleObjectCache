@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
 
-#if __PORTABLE__
+#if __MOBILE__ || __PORTABLE__
 using SQLite.Net.Async;
 #else
 using SQLite;

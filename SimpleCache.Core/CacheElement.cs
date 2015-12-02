@@ -1,6 +1,6 @@
 ﻿using System;
 
-#if __PORTABLE__
+#if __MOBILE__ || __PORTABLE__
 using SQLite.Net.Attributes;
 #else
 using SQLite;
