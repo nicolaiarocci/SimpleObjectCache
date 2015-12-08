@@ -163,14 +163,14 @@ namespace Amica.vNext
                 Value = data,
                 CreatedAt = createdAt,
                 Expiration = exp
-            });
+            }).ConfigureAwait(false);
         }
 
         public async Task<int> Invalidate<T>(string key)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
 
-            var element = await GetConnection().FindAsync<CacheElement>(key);
+            var element = await GetConnection().FindAsync<CacheElement>(key).ConfigureAwait(false);
             if (element == null)
                 throw new KeyNotFoundException(nameof(key));
 
@@ -178,7 +178,7 @@ namespace Amica.vNext
             if (element.TypeName != typeName)
                 throw new SimpleCacheTypeMismatchException();
 
-            return await GetConnection().DeleteAsync(element);
+            return await GetConnection().DeleteAsync(element).ConfigureAwait(false);
         }
 
         public async Task<int> InvalidateAll<T>()
