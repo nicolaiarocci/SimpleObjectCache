@@ -1,9 +1,9 @@
 ﻿using System;
 
-#if __MOBILE__ || __PORTABLE__
-using SQLite.Net.Attributes;
-#else
+#if NET4
 using SQLite;
+#else
+using SQLite.Net.Attributes;
 #endif
 
 namespace Amica.vNext

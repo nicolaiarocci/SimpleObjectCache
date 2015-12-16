@@ -7,18 +7,13 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
 
-#if __MOBILE__ || __PORTABLE__
-using SQLite.Net.Async;
-#else
+#if NET4
 using SQLite;
+#else
+using SQLite.Net.Async;
+[assembly:InternalsVisibleTo("Tests")]
 #endif
 
-[assembly:InternalsVisibleTo("Tests, PublicKey ="+
- "0024000004800000940000000602000000240000525341310004000001000100c30aa9a63d6e"+
- "0b46598d4a2cd3a17cd848dc468e443ecc27a5e910bf77bb357a9d78c161431c3cc51bb61c72"+
- "6547a6c68219f59a6eeeb2f5a92f708d49db1e63466cb53ef05e4988d6185a8d779d66b01431"+
- "877b75f02109d3e3a54b5eb87d29f180417bd2a03384cbb3b9692df63161313dc770682e7fb81"+
- "14e8cf5120cdfb2")]
 
 namespace Amica.vNext
 {
