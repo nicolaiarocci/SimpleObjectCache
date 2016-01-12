@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCache.Net4", "SimpleCache.Net4\SimpleCache.Net4.csproj", "{5A320348-7AE0-421A-B3EC-25FF8FED4243}"
 EndProject
@@ -20,8 +20,11 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SimpleCache.Core", "SimpleC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCache.Net45", "SimpleCache.Net45\SimpleCache.Net45.csproj", "{0B199775-AA32-4673-8C1F-9EC88754D751}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCache", "SimpleCache\SimpleCache.csproj", "{19CABCAD-C5AD-4008-A4C0-152775CB58AF}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SimpleCache.Core\SimpleCache.Core.projitems*{19cabcad-c5ad-4008-a4c0-152775cb58af}*SharedItemsImports = 4
 		SimpleCache.Core\SimpleCache.Core.projitems*{5a320348-7ae0-421a-b3ec-25ff8fed4243}*SharedItemsImports = 4
 		SimpleCache.Core\SimpleCache.Core.projitems*{0b199775-aa32-4673-8c1f-9ec88754d751}*SharedItemsImports = 4
 		SimpleCache.Core\SimpleCache.Core.projitems*{aecc0b9c-1e6f-47ed-9a52-c572039a804e}*SharedItemsImports = 4
@@ -48,6 +51,10 @@ Global
 		{0B199775-AA32-4673-8C1F-9EC88754D751}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B199775-AA32-4673-8C1F-9EC88754D751}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B199775-AA32-4673-8C1F-9EC88754D751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19CABCAD-C5AD-4008-A4C0-152775CB58AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19CABCAD-C5AD-4008-A4C0-152775CB58AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19CABCAD-C5AD-4008-A4C0-152775CB58AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19CABCAD-C5AD-4008-A4C0-152775CB58AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
