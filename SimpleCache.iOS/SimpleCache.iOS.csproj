@@ -6,7 +6,7 @@
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{AECC0B9C-1E6F-47ED-9A52-C572039A804E}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Amica.vNext</RootNamespace>
+    <RootNamespace>SimpleCache</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>SimpleCache.iOS</AssemblyName>
     <NuGetPackageImportStamp>

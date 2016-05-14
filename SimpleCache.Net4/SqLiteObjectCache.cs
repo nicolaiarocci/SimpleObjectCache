@@ -2,7 +2,7 @@
 using System.IO;
 using SQLite;
 
-namespace Amica.vNext
+namespace SimpleCache
 {
     public class SqliteObjectCache : SqliteObjectCacheBase
     {

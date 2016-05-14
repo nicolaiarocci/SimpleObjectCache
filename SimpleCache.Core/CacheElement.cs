@@ -6,7 +6,7 @@ using SQLite;
 using SQLite.Net.Attributes;
 #endif
 
-namespace Amica.vNext
+namespace SimpleCache
 {
     class CacheElement
     {

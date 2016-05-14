@@ -7,7 +7,7 @@
     <ProjectGuid>{5A320348-7AE0-421A-B3EC-25FF8FED4243}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Amica.vNext</RootNamespace>
+    <RootNamespace>SimpleCache</RootNamespace>
     <AssemblyName>SimpleCache.Net4</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

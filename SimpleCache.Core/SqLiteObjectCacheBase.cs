@@ -15,7 +15,7 @@ using SQLite.Net.Async;
 #endif
 
 
-namespace Amica.vNext
+namespace SimpleCache
 {
 
     public abstract class SqliteObjectCacheBase : IBulkObjectCache

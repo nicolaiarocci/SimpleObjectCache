@@ -3,7 +3,7 @@ using System.IO;
 using SQLite.Net;
 using SQLite.Net.Async;
 
-namespace Amica.vNext
+namespace SimpleCache
 {
     public class SqliteObjectCache : SqliteObjectCacheBase
     {

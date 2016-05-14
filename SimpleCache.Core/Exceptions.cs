@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Amica.vNext
+namespace SimpleCache
 {
     class SimpleCacheApplicationNameNullException : Exception
     {

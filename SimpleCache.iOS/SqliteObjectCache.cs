@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
-using Amica.vNext;
 using SQLite.Net;
 using SQLite.Net.Async;
+using SimpleCache;
 
 [assembly: Xamarin.Forms.Dependency(typeof(SqliteObjectCache))]
 
-namespace Amica.vNext
+namespace SimpleCache
 {
     public class SqliteObjectCache : SqliteObjectCacheBase
     {
