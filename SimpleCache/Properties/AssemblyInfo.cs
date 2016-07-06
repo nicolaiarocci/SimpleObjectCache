@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SimpleCache")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Simple permanent, cross-platform and asynchronous key-value object cache")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("CIR 2000")]
+[assembly: AssemblyCompany("Nicola Iarocci, CIR 2000")]
 [assembly: AssemblyProduct("SimpleCache")]
 [assembly: AssemblyCopyright("Copyright © CIR 2000 2016")]
 [assembly: AssemblyTrademark("")]
