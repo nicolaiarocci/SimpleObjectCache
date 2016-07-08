@@ -1,5 +1,5 @@
 # SimpleCache
-Asynchronous, permanent and cross-platform key-value object cache powered by SQLite3.
+Simple asynchronous, permanent and cross-platform key-value object cache.
 
 ## Usage
 ```C#
@@ -63,8 +63,7 @@ iOS, .NET4, .NET45. Android is planned (or you can add it yourself, pull request
 Work in progress. Not on NuGet yet. Contributors welcome.
 
 ## Licence
-SimpleCache a [Nicola Iarocci][ni] and [Gestionali Amica][ga] open source project and is [BSD][bsd] licensed.
+SimpleCache a [Nicola Iarocci][ni] open source project, and it is [BSD][bsd] licensed.
 
-[bsd]: http://github.com/FatturaElettronicaPA/FatturaElettronicaPA/blob/master/LICENSE
+[bsd]: http://github.com/nicolaiarocci/SimpleCache/blob/master/LICENSE
 [ni]: http://nicolaiarocci.com
-[ga]: http://gestionaleamica.com
