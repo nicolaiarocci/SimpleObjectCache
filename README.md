@@ -54,10 +54,10 @@ Asynchronous, permanent and cross-platform key-value object cache powered by SQL
     Assert.That(returnedPersons.Count(), Is.EqualTo(1));
     Assert.That(returnedPersons[0].Name, Is.EqualTo(john.Name));
 ```
-Note that all methods are Async, even if they don't have the suffix (it's a 100% async library anyway). 
+Note that all methods are Async, even if they don't have the suffix.
 
 ## Supported systems
-iOS, .NET4, .NET45. Android is planned (or you can add it yourself!).
+iOS, .NET4, .NET45. Android is planned (or you can add it yourself, pull requests are welcome!).
 
 ## Current status
 Work in progress. Not on NuGet yet. Contributors welcome.
