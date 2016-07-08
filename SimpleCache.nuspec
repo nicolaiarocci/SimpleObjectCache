@@ -5,7 +5,7 @@
 		<title>SimpleCache for .NET</title>
 		<version>1.0.0</version>
 		<authors>Nicola Iarocci</authors>
-		<owners>Nicola Iarocci</owners>
+		<owners>Nicola Iarocci, CIR2000</owners>
 		<description>Permanent, cross-platform, asynchronous key-value object cache</description>
 		<releaseNotes>First public release</releaseNotes>
 		<copyright>Copyright 2016 Nicola Iarocci and CIR2000</copyright>
