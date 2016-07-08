@@ -28,6 +28,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		SimpleCache.Core\SimpleCache.Core.projitems*{19cabcad-c5ad-4008-a4c0-152775cb58af}*SharedItemsImports = 4
 		SimpleCache.Core\SimpleCache.Core.projitems*{5a320348-7ae0-421a-b3ec-25ff8fed4243}*SharedItemsImports = 4
+		SimpleCache.Core\SimpleCache.Core.projitems*{0b199775-aa32-4673-8c1f-9ec88754d751}*SharedItemsImports = 4
 		SimpleCache.Core\SimpleCache.Core.projitems*{f0f65631-c26b-4a72-b0a3-4a770383a71b}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +56,10 @@ Global
 		{19CABCAD-C5AD-4008-A4C0-152775CB58AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19CABCAD-C5AD-4008-A4C0-152775CB58AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19CABCAD-C5AD-4008-A4C0-152775CB58AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED40DEF6-EB92-457F-9184-793E34009AA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED40DEF6-EB92-457F-9184-793E34009AA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED40DEF6-EB92-457F-9184-793E34009AA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED40DEF6-EB92-457F-9184-793E34009AA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

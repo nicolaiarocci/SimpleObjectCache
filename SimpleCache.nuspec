@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+	<metadata>
+		<id>SimpleCache</id>
+		<title>SimpleCache for .NET</title>
+		<version>1.0.0</version>
+		<authors>Nicola Iarocci</authors>
+		<owners>Nicola Iarocci</owners>
+		<description>Permanent, cross-platform, asynchronous key-value object cache</description>
+		<releaseNotes>First public release</releaseNotes>
+		<copyright>Copyright 2016 Nicola Iarocci and CIR2000</copyright>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<licenseUrl>https://github.com/CIR2000/SimpleCache/blob/master/LICENSE.txt</licenseUrl>
+		<projectUrl>https://github.com/CIR2000/SimpleCache</projectUrl>
+		<tags></tags>
+		<dependencies>
+			<group>
+				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
+				<dependency id="SQLite.Net.Core-PCL" version="3.1.1" />
+				<dependency id="SQLite.Net-PCL" version="3.1.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
+			</group>
+			<group targetFramework="xamarinios10">
+				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
+				<dependency id="SQLite.Net.Core-PCL" version="3.1.1" />
+				<dependency id="SQLite.Net-PCL" version="3.1.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
+				<dependency id="Xamarin.Forms" version="2.0.0.6487" />
+			</group>
+			<group targetFramework="portable45-net45+win8">
+				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
+				<dependency id="SQLite.Net.Core-PCL" version="3.1.1" />
+				<dependency id="SQLite.Net-PCL" version="3.1.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
+			</group>
+			<group targetFramework="net45">
+				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
+				<dependency id="SQLite.Net.Core-PCL" version="3.1.1" />
+				<dependency id="SQLite.Net-PCL" version="3.1.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
+			</group>
+			<group targetFramework="net4">
+				<dependency id="Microsoft.Bcl" version="1.1.8" />
+				<dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+				<dependency id="Microsoft.Bcl.Build" version="1.0.14" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="bin\Release\Net45\SimpleCache.???" target="lib\net45" />
+		<file src="bin\Release\portable45-net45+win8\SimpleCache.???" target="lib\portable45-net45+win8" />
+		<file src="bin\Release\xamarinios10\SimpleCache.???" target="lib\xamarinios10" />
+		<file src="bin\Release\Net4\SimpleCache.???" target="lib\Net4" />
+	</files>
+</package>
