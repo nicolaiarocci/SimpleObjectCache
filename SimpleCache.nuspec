@@ -27,12 +27,6 @@
 				<dependency id="Newtonsoft.Json" version="8.0.2" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6487" />
 			</group>
-			<group targetFramework="portable45-net45+win8">
-				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
-				<dependency id="SQLite.Net.Core-PCL" version="3.1.1" />
-				<dependency id="SQLite.Net-PCL" version="3.1.1" />
-				<dependency id="Newtonsoft.Json" version="8.0.2" />
-			</group>
 			<group targetFramework="net45">
 				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net.Core-PCL" version="3.1.1" />
@@ -45,12 +39,18 @@
 				<dependency id="Microsoft.Bcl.Build" version="1.0.14" />
 				<dependency id="Newtonsoft.Json" version="8.0.2" />
 			</group>
+			<!--<group targetFramework="portable45-net45+win8+wp8+wpa81">
+				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
+				<dependency id="SQLite.Net.Core-PCL" version="3.1.1" />
+				<dependency id="SQLite.Net-PCL" version="3.1.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
+			</group>-->
 		</dependencies>
 	</metadata>
 	<files>
 		<file src="bin\Release\Net45\SimpleCache.???" target="lib\net45" />
-		<file src="bin\Release\portable45-net45+win8\SimpleCache.???" target="lib\portable45-net45+win8" />
 		<file src="bin\Release\xamarinios10\SimpleCache.???" target="lib\xamarinios10" />
 		<file src="bin\Release\Net4\SimpleCache.???" target="lib\Net4" />
+		<!--<file src="bin\Release\portable45-net45+win8+wp8+wpa81\SimpleCache.???" target="lib\portable45-net45+win8+wp8+wpa81" />-->
 	</files>
 </package>

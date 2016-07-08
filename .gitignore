@@ -158,3 +158,6 @@ $RECYCLE.BIN/
 
 # sqlite3.dll
 ext/
+
+SimpleCache.Test.Projects/
+*.nupkg
