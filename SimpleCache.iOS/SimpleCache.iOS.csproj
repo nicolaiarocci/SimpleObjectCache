@@ -83,7 +83,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="..\SimpleCache.Core\SimpleCache.Core.projitems" Label="Shared" />
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleCache\SimpleCache.csproj">
+      <Project>{19cabcad-c5ad-4008-a4c0-152775cb58af}</Project>
+      <Name>SimpleCache</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\packages\Xamarin.Forms.2.0.0.6487\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.0.0.6487\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
