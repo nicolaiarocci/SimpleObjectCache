@@ -51,7 +51,7 @@
 		<file src="bin\Release\Net45\SimpleCache.???" target="lib\net45" />
 		<file src="bin\Release\xamarinios10\SimpleCache.???" target="lib\xamarinios10" />
 		<file src="bin\Release\Net4\SimpleCache.???" target="lib\Net4" />
-		<file src="bin\Release\monoandroid403\SimpleCache.???" target="lib\monoandroid403" />
+		<!--<file src="bin\Release\monoandroid403\SimpleCache.???" target="lib\monoandroid403" />-->
 		
 		<!--<file src="bin\Release\portable45-net45+win8+wp8+wpa81\SimpleCache.???" target="lib\portable45-net45+win8+wp8+wpa81" />-->
 	</files>
