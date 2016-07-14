@@ -57,7 +57,7 @@ Simple asynchronous, permanent and cross-platform key-value object cache.
 Note that all methods are Async, even if they don't have the suffix.
 
 ## Supported systems
-iOS, .NET4, .NET45. Android is planned (or you can add it yourself, pull requests are welcome!).
+iOS, Android, .NET4, .NET45.
 
 ## Current status
 Work in progress. Not on NuGet yet. Contributors welcome.
