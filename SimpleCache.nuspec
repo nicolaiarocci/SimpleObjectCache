@@ -25,7 +25,6 @@
 				<dependency id="SQLite.Net.Core-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net-PCL" version="3.1.1" />
 				<dependency id="Newtonsoft.Json" version="8.0.2" />
-				<dependency id="Xamarin.Forms" version="2.0.0.6487" />
 			</group>
 			<group targetFramework="monoandroid403">
 				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />

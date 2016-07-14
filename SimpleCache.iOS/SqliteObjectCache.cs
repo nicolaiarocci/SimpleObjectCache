@@ -2,9 +2,6 @@
 using System.IO;
 using SQLite.Net;
 using SQLite.Net.Async;
-using SimpleCache;
-
-[assembly: Xamarin.Forms.Dependency(typeof(SqliteObjectCache))]
 
 namespace SimpleCache
 {
