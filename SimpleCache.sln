@@ -28,8 +28,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCache.Android", "Simp
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SimpleCache.Core\SimpleCache.Core.projitems*{0b199775-aa32-4673-8c1f-9ec88754d751}*SharedItemsImports = 4
 		SimpleCache.Core\SimpleCache.Core.projitems*{19cabcad-c5ad-4008-a4c0-152775cb58af}*SharedItemsImports = 4
 		SimpleCache.Core\SimpleCache.Core.projitems*{5a320348-7ae0-421a-b3ec-25ff8fed4243}*SharedItemsImports = 4
+		SimpleCache.Core\SimpleCache.Core.projitems*{8a34dbd2-d75e-4abd-8577-90d8de52b2f0}*SharedItemsImports = 4
+		SimpleCache.Core\SimpleCache.Core.projitems*{aecc0b9c-1e6f-47ed-9a52-c572039a804e}*SharedItemsImports = 4
 		SimpleCache.Core\SimpleCache.Core.projitems*{f0f65631-c26b-4a72-b0a3-4a770383a71b}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

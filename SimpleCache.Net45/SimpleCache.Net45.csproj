@@ -74,15 +74,12 @@
     <Compile Include="SqliteObjectCache.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="SimpleCache.snk" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SimpleCache\SimpleCache.csproj">
-      <Project>{19cabcad-c5ad-4008-a4c0-152775cb58af}</Project>
-      <Name>SimpleCache</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <Import Project="..\SimpleCache.Core\SimpleCache.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

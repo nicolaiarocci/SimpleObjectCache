@@ -8,7 +8,7 @@ using SQLite.Net.Attributes;
 
 namespace SimpleCache
 {
-    class CacheElement
+    public class CacheElement
     {
 	[PrimaryKey]
 	public string Key { get; set; }
