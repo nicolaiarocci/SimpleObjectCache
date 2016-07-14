@@ -31,8 +31,8 @@ Simple asynchronous, permanent and cross-platform key-value object cache.
     // Bulk inserts are also possible.
     var persons = new Dictionary<string, Person>()
     {
-	{"tom", new Person {Name = "tom", Age = 19}},
-	{"mike", new Person {Name = "mike", Age = 30}},
+	  {"tom", new Person {Name = "tom", Age = 19}},
+	  {"mike", new Person {Name = "mike", Age = 30}},
     };
 
     // Tom and Mike expiration date is set to... yesterday(!).
