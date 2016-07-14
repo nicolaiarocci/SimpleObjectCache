@@ -1,5 +1,9 @@
 # SimpleCache
-Simple asynchronous, permanent and cross-platform key-value object cache.
+SimpleCache is a very simple asynchronous, permanent key-value object cache for .NET platforms.
+
+## Supported platforms
+Xamarin.iOS, Xamarin.Android, .NET 4.0, .NET 4.5+
+
 
 ## Usage
 ```C#
@@ -55,9 +59,6 @@ Simple asynchronous, permanent and cross-platform key-value object cache.
     Assert.That(returnedPersons[0].Name, Is.EqualTo(john.Name));
 ```
 Note that all methods are Async, even if they don't have the suffix.
-
-## Supported systems
-iOS, Android, .NET4, .NET45.
 
 ## Current status
 Work in progress. Not on NuGet yet. Contributors welcome.
