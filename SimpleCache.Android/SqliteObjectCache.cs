@@ -2,13 +2,18 @@
 using System.IO;
 using SQLite.Net;
 using SQLite.Net.Async;
-using SimpleCache;
 
 
 namespace SimpleCache
 {
+    /// <summary>
+    /// Permanent key-value object cache.
+    /// </summary>
 	public class SqliteObjectCache : SqliteObjectCacheBase
 	{
+        /// <summary>
+        /// Platform (Android) connection.
+        /// </summary>
 		protected override SQLiteAsyncConnection PlatformConnection()
 		{
 			var dbPath = Path.Combine(

@@ -5,8 +5,14 @@ using SQLite.Net.Async;
 
 namespace SimpleCache
 {
+    /// <summary>
+    /// Permanent key-value object cache.
+    /// </summary>
     public class SqliteObjectCache : SqliteObjectCacheBase
     {
+        /// <summary>
+        /// Platform (iOS) connection.
+        /// </summary>
         protected override SQLiteAsyncConnection PlatformConnection()
         {
             var dbPath = Path.Combine(
