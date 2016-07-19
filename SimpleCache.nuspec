@@ -6,7 +6,7 @@
 		<version>1.0.0</version>
 		<authors>Nicola Iarocci</authors>
 		<owners>Nicola Iarocci</owners>
-		<description>Permanent, cross-platform, asynchronous key-value object cache</description>
+		<description>Simple cross-platform object cache for .NET</description>
 		<releaseNotes>First public release</releaseNotes>
 		<copyright>Copyright 2016 Nicola Iarocci</copyright>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
