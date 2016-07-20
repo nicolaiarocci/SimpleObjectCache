@@ -60,11 +60,18 @@ Xamarin.iOS, Xamarin.Android, .NET 4.0, .NET 4.5+
 ```
 Note that all methods are Async, even if they don't have the suffix.
 
-## Current status
-Work in progress. Not on NuGet yet. Contributors welcome.
+## Installation
+SimpleObjectCache is on [NuGet][nu]. Run the following command on the Package Manager Console:
+
+```
+    PM> Install-Package SimpleObjectCache
+```
+
+Or install via the NuGet Package Manager in Visual Studio.
 
 ## Licence
 SimpleObjectCache a [Nicola Iarocci][ni] open source project, and it is [BSD][bsd] licensed.
 
 [bsd]: http://github.com/nicolaiarocci/SimpleObjectCache/blob/master/LICENSE
 [ni]: http://nicolaiarocci.com
+[nu]: https://www.nuget.org/packages/SimpleObjectCache/
