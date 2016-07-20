@@ -2,7 +2,7 @@
 using System.Resources;
 
 [assembly: AssemblyTitle("SimpleObjectCache")]
-[assembly: AssemblyDescription("Simple cross-platform object cache for .NET")]
+[assembly: AssemblyDescription("Simple cross-platform object cache for .NET systems")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Nicola Iarocci, CIR 2000")]
 [assembly: AssemblyProduct("SimpleObjectCache")]

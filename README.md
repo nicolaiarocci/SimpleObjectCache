@@ -1,5 +1,5 @@
 # SimpleObjectCache
-SimpleObjectCache is a very simple asynchronous, permanent key-value object cache for .NET platforms.
+Simple asynchronous, permanent key-value object cache for .NET systems.
 
 ## Supported platforms
 Xamarin.iOS, Xamarin.Android, .NET 4.0, .NET 4.5+
@@ -13,7 +13,7 @@ Xamarin.iOS, Xamarin.Android, .NET 4.0, .NET 4.5+
        might be different. On windows it would be something
        like C:\ProgramData\<ApplicationName>\SimpleObjectCache
     */ 
-    var cache = new SimpleObjectCache.SqliteObjectCache { ApplicationName = "MyApplication"};
+    var cache = new SqliteObjectCache { ApplicationName = "MyApplication"};
 
     // Create an object.
     var john = new Person() {Name = "john", Age = 19};
