@@ -69,7 +69,7 @@ SimpleObjectCache is on [NuGet][nu]. Run the following command on the Package Ma
 
 Or install via the NuGet Package Manager in Visual Studio.
 
-## Licence
+## License
 SimpleObjectCache a [Nicola Iarocci][ni] open source project, and it is [BSD][bsd] licensed.
 
 [bsd]: http://github.com/nicolaiarocci/SimpleObjectCache/blob/master/LICENSE
