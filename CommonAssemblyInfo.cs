@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Resources;
 
-[assembly: AssemblyTitle("SimpleCache")]
-[assembly: AssemblyDescription("Simple permanent, cross-platform and asynchronous key-value object cache")]
+[assembly: AssemblyTitle("SimpleObjectCache")]
+[assembly: AssemblyDescription("Simple cross-platform object cache for .NET")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Nicola Iarocci, CIR 2000")]
-[assembly: AssemblyProduct("SimpleCache")]
+[assembly: AssemblyProduct("SimpleObjectCache")]
 [assembly: AssemblyCopyright("Copyright © CIR 2000 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SimpleCache
+namespace SimpleObjectCache
 {
     /// <summary>
-    /// IObjectCache is the core interface on which SimpleCache is built, it is an
+    /// IObjectCache is the core interface on which SimpleObjectCache is built, it is an
     /// interface describing an asynchronous persistent key-value store. 
     /// </summary>
     public interface IObjectCache : IDisposable

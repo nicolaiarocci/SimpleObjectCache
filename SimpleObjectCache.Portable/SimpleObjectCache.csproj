@@ -8,8 +8,8 @@
     <ProjectGuid>{19CABCAD-C5AD-4008-A4C0-152775CB58AF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimpleCache</RootNamespace>
-    <AssemblyName>SimpleCache</AssemblyName>
+    <RootNamespace>SimpleObjectCache</RootNamespace>
+    <AssemblyName>SimpleObjectCache</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -33,7 +33,7 @@
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\portable45-net45+win8+wp8+wpa81\SimpleCache.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Release\portable45-net45+win8+wp8+wpa81\SimpleObjectCache.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs">
@@ -58,7 +58,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="..\SimpleCache.Core\SimpleCache.Core.projitems" Label="Shared" />
+  <Import Project="..\SimpleObjectCache.Core\SimpleCache.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,5 +1,5 @@
-# SimpleCache
-SimpleCache is a very simple asynchronous, permanent key-value object cache for .NET platforms.
+# SimpleObjectCache
+SimpleObjectCache is a very simple asynchronous, permanent key-value object cache for .NET platforms.
 
 ## Supported platforms
 Xamarin.iOS, Xamarin.Android, .NET 4.0, .NET 4.5+
@@ -11,9 +11,9 @@ Xamarin.iOS, Xamarin.Android, .NET 4.0, .NET 4.5+
        This is also the folder where your cache will reside.
        Depending on the host OS the location of this folder
        might be different. On windows it would be something
-       like C:\ProgramData\<ApplicationName>\SimpleCache
+       like C:\ProgramData\<ApplicationName>\SimpleObjectCache
     */ 
-    var cache = new SimpleCache.SqliteObjectCache { ApplicationName = "MyApplication"};
+    var cache = new SimpleObjectCache.SqliteObjectCache { ApplicationName = "MyApplication"};
 
     // Create an object.
     var john = new Person() {Name = "john", Age = 19};
@@ -64,7 +64,7 @@ Note that all methods are Async, even if they don't have the suffix.
 Work in progress. Not on NuGet yet. Contributors welcome.
 
 ## Licence
-SimpleCache a [Nicola Iarocci][ni] open source project, and it is [BSD][bsd] licensed.
+SimpleObjectCache a [Nicola Iarocci][ni] open source project, and it is [BSD][bsd] licensed.
 
-[bsd]: http://github.com/nicolaiarocci/SimpleCache/blob/master/LICENSE
+[bsd]: http://github.com/nicolaiarocci/SimpleObjectCache/blob/master/LICENSE
 [ni]: http://nicolaiarocci.com

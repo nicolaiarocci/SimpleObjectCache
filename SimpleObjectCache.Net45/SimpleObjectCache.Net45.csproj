@@ -7,8 +7,8 @@
     <ProjectGuid>{0B199775-AA32-4673-8C1F-9EC88754D751}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimpleCache</RootNamespace>
-    <AssemblyName>SimpleCache</AssemblyName>
+    <RootNamespace>SimpleObjectCache</RootNamespace>
+    <AssemblyName>SimpleObjectCache</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -28,7 +28,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\net45\SimpleCache.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\net45\SimpleObjectCache.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -79,7 +79,7 @@
     </None>
     <None Include="SimpleCache.snk" />
   </ItemGroup>
-  <Import Project="..\SimpleCache.Core\SimpleCache.Core.projitems" Label="Shared" />
+  <Import Project="..\SimpleObjectCache.Core\SimpleCache.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

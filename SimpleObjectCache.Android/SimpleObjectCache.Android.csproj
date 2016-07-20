@@ -6,8 +6,8 @@
     <ProjectGuid>{8A34DBD2-D75E-4ABD-8577-90D8DE52B2F0}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>SimpleCache.Android</RootNamespace>
-    <AssemblyName>SimpleCache</AssemblyName>
+    <RootNamespace>SimpleObjectCache</RootNamespace>
+    <AssemblyName>SimpleObjectCache</AssemblyName>
     <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -66,6 +66,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
-  <Import Project="..\SimpleCache.Core\SimpleCache.Core.projitems" Label="Shared" />
+  <Import Project="..\SimpleObjectCache.Core\SimpleCache.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
-		<id>SimpleCache</id>
-		<title>SimpleCache for .NET</title>
+		<id>SimpleObjectCache</id>
+		<title>SimpleObjectCache for .NET</title>
 		<version>1.0.0</version>
 		<authors>Nicola Iarocci</authors>
 		<owners>Nicola Iarocci</owners>
@@ -10,8 +10,8 @@
 		<releaseNotes>First public release</releaseNotes>
 		<copyright>Copyright 2016 Nicola Iarocci</copyright>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<licenseUrl>https://github.com/nicolaiarocci/SimpleCache/blob/master/LICENSE</licenseUrl>
-		<projectUrl>https://github.com/nicolaiarocci/SimpleCache</projectUrl>
+		<licenseUrl>https://github.com/nicolaiarocci/SimpleObjectCache/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/nicolaiarocci/SimpleObjectCache</projectUrl>
 		<tags></tags>
 		<dependencies>
 			<group>
@@ -53,10 +53,10 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="bin\Release\xamarinios10\SimpleCache.???" target="lib\xamarinios10" />
-		<file src="bin\Release\monoandroid403\SimpleCache.???" target="lib\monoandroid403" />
-		<file src="bin\Release\Net45\SimpleCache.???" target="lib\net45" />
-		<file src="bin\Release\Net4\SimpleCache.???" target="lib\Net4" />
-		<file src="bin\Release\portable45-net45+win8+wp8+wpa81\SimpleCache.???" target="lib\portable45-net45+win8+wp8+wpa81" />
+		<file src="bin\Release\xamarinios10\SimpleObjectCache.???" target="lib\xamarinios10" />
+		<file src="bin\Release\monoandroid403\SimpleObjectCache.???" target="lib\monoandroid403" />
+		<file src="bin\Release\Net45\SimpleObjectCache.???" target="lib\net45" />
+		<file src="bin\Release\Net4\SimpleObjectCache.???" target="lib\Net4" />
+		<file src="bin\Release\portable45-net45+win8+wp8+wpa81\SimpleObjectCache.???" target="lib\portable45-net45+win8+wp8+wpa81" />
 	</files>
 </package>

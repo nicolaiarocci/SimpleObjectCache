@@ -2,7 +2,7 @@
 using System.IO;
 using SQLite;
 
-namespace SimpleCache
+namespace SimpleObjectCache
 {
     /// <summary>
     /// Permanent key-value object cache.
@@ -16,7 +16,7 @@ namespace SimpleCache
         {
             var dbPath = Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), 
-				Path.Combine(ApplicationName, "SimpleCache"));
+				Path.Combine(ApplicationName, "SimpleObjectCache"));
 
             Directory.CreateDirectory(dbPath);
 

@@ -6,7 +6,7 @@ using SQLite;
 using SQLite.Net.Attributes;
 #endif
 
-namespace SimpleCache
+namespace SimpleObjectCache
 {
     public class CacheElement
     {

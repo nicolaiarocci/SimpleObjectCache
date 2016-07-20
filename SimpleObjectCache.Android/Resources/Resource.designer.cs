@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("SimpleCache.Android.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("SimpleObjectCache.Resource", IsApplication=false)]
 
-namespace SimpleCache.Android
+namespace SimpleObjectCache
 {
 	
 	

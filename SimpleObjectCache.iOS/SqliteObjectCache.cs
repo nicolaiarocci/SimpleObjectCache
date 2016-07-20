@@ -3,7 +3,7 @@ using System.IO;
 using SQLite.Net;
 using SQLite.Net.Async;
 
-namespace SimpleCache
+namespace SimpleObjectCache
 {
     /// <summary>
     /// Permanent key-value object cache.
@@ -11,18 +11,18 @@ namespace SimpleCache
     public class SqliteObjectCache : SqliteObjectCacheBase
     {
         /// <summary>
-        /// Platform (Windows Desktop) connection.
+        /// Platform (iOS) connection.
         /// </summary>
         protected override SQLiteAsyncConnection PlatformConnection()
         {
             var dbPath = Path.Combine(
-				Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), 
-				Path.Combine(ApplicationName, "SimpleCache"));
+				Environment.GetFolderPath(Environment.SpecialFolder.Personal), 
+				Path.Combine(ApplicationName, "SimpleObjectCache"));
 
             Directory.CreateDirectory(dbPath);
 
             var lockedConnection = new SQLiteConnectionWithLock(
-				new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(),
+				new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS(), 
 				new SQLiteConnectionString(
 					Path.Combine(dbPath, "cache.db3"), 
 					true));

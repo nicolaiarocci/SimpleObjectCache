@@ -7,7 +7,7 @@ using NUnit.Framework;
 using SQLite;
 
 // ReSharper disable once CheckNamespace
-namespace SimpleCache
+namespace SimpleObjectCache
 {
     [TestFixture]
     internal class SqliteObjectCacheTest
@@ -25,7 +25,7 @@ namespace SimpleCache
 
             _expectedDatabasePath = Path.Combine(
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), AppName),
-                "SimpleCache");
+                "SimpleObjectCache");
 
             Directory.CreateDirectory(_expectedDatabasePath);
             _connection = new SQLiteConnection(Path.Combine(_expectedDatabasePath, "cache.db3"));
@@ -48,7 +48,7 @@ namespace SimpleCache
 
             Assert.That(() => _cache.ApplicationName,
                 Throws.Exception
-                    .TypeOf<SimpleCacheApplicationNameNullException>()
+                    .TypeOf<SimpleObjectCacheApplicationNameNullException>()
                     .With.Message.EqualTo("Make sure to set ApplicationName on startup"));
 
             _cache.ApplicationName = AppName;
@@ -206,7 +206,7 @@ namespace SimpleCache
                 Is.EqualTo(1));
 
             Assert.That(async () => await _cache.Invalidate<Address>(key),
-                Throws.TypeOf<SimpleCacheTypeMismatchException>());
+                Throws.TypeOf<SimpleObjectCacheTypeMismatchException>());
 
             var deleted = await _cache.Invalidate<Person>(key);
             Assert.That(deleted, Is.EqualTo(1));

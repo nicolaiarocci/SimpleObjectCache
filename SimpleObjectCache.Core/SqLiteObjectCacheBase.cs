@@ -15,7 +15,7 @@ using SQLite.Net.Async;
 #endif
 
 
-namespace SimpleCache
+namespace SimpleObjectCache
 {
 
     public abstract class SqliteObjectCacheBase : IBulkObjectCache
@@ -32,7 +32,7 @@ namespace SimpleCache
             get
             {
                 if (_applicationName == null)
-                    throw new SimpleCacheApplicationNameNullException();
+                    throw new SimpleObjectCacheApplicationNameNullException();
 
                 return _applicationName;
             }
@@ -171,7 +171,7 @@ namespace SimpleCache
 
             var typeName = typeof (T).FullName;
             if (element.TypeName != typeName)
-                throw new SimpleCacheTypeMismatchException();
+                throw new SimpleObjectCacheTypeMismatchException();
 
             return await GetConnection().DeleteAsync(element).ConfigureAwait(false);
         }

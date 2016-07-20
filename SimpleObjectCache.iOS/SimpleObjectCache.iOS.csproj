@@ -6,9 +6,9 @@
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{AECC0B9C-1E6F-47ED-9A52-C572039A804E}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>SimpleCache</RootNamespace>
+    <RootNamespace>SimpleObjectCache</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>SimpleCache</AssemblyName>
+    <AssemblyName>SimpleObjectCache</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -29,7 +29,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <DocumentationFile>..\bin\Release\xamarinios10\SimpleCache.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Release\xamarinios10\SimpleObjectCache.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -67,5 +67,5 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="..\SimpleCache.Core\SimpleCache.Core.projitems" Label="Shared" />
+  <Import Project="..\SimpleObjectCache.Core\SimpleCache.Core.projitems" Label="Shared" />
 </Project>
