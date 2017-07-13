@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.1</TargetFramework>
+    <PackageTargetFallback>$(PackageTargetFallback);portable-win+net45+wp8+win81+wpa8</PackageTargetFallback>
+    <PackageId>SimpleObjectCache</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Nicola Iarocci</Authors>
+    <Company>CIR 2000</Company>
+    <Product>SimpleObjectCache</Product>
+    <Description>Simple cross-platform object cache for .NET systems</Description>
+    <Copyright>Copyright 2016-2017 Nicola Iarocci and CIR 2000</Copyright>
+    <PackageLicenseUrl>https://github.com/nicolaiarocci/SimpleObjectCache/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/nicolaiarocci/SimpleObjectCache</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nicolaiarocci/SimpleObjectCache</RepositoryUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <Import Project="..\SimpleObjectCache.Core\SimpleCache.Core.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="SQLite.Net.Async-PCL" Version="3.1.1" />
+  </ItemGroup>
+
+</Project>
