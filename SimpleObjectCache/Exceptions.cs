@@ -9,4 +9,7 @@ namespace SimpleObjectCache
     class SimpleObjectCacheTypeMismatchException : Exception
     {
     }
+    class SimpleObjectCacheDatabasePathNullException : Exception
+    {
+    }
 }

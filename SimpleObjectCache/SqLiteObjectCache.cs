@@ -2,48 +2,36 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
-
-#if NET4
 using SQLite;
-#else
-using SQLite.Net.Async;
-[assembly:InternalsVisibleTo("Tests")]
-#endif
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Tests")]
 
 namespace SimpleObjectCache
 {
 
-    public abstract class SqliteObjectCacheBase : IBulkObjectCache
+    public class SqliteObjectCache : IBulkObjectCache
     {
         private static SQLiteAsyncConnection _connection;
-        private string _applicationName;
+        private string _databasePath;
 
         /// <summary>
-        /// Your application's name. Set this at startup, this defines where
-        /// your data will be stored (usually at %AppData%\[ApplicationName])
+        /// Database path, filename included.
         /// </summary>
-        public string ApplicationName
+        public string DatabasePath
         {
             get
             {
-                if (_applicationName == null)
-                    throw new SimpleObjectCacheApplicationNameNullException();
+                if (_databasePath == null)
+                    throw new SimpleObjectCacheDatabasePathNullException();
 
-                return _applicationName;
+                return _databasePath;
             }
-            set { _applicationName = value; }
+            set { _databasePath = value; }
         }
-
-        /// <summary>
-        /// Returns the appropriate platform connection.
-        /// </summary>
-        /// <returns>The platform connection.</returns>
-        protected abstract SQLiteAsyncConnection PlatformConnection();
 
 
         private SQLiteAsyncConnection GetConnection()
@@ -54,6 +42,15 @@ namespace SimpleObjectCache
 			_connection.CreateTableAsync<CacheElement>().ConfigureAwait(false);
 
             return _connection;
+        }
+
+        /// <summary>
+        /// Returns the appropriate platform connection.
+        /// </summary>
+        /// <returns>The platform connection.</returns>
+        protected SQLiteAsyncConnection PlatformConnection()
+        {
+            return new SQLiteAsyncConnection(DatabasePath);
         }
 
         /// <summary>

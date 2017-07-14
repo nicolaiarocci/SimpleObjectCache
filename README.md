@@ -2,18 +2,13 @@
 Simple asynchronous, permanent key-value object cache for .NET systems.
 
 ## Supported platforms
-Xamarin.iOS, Xamarin.Android, .NET 4.0, .NET 4.5+
+SimpleObjectCache is released as a NetStandard 1.1 package, which makes 
+it compatible with a [wide range][ns] of platforms.
 
 
 ## Usage
 ```C#
-    /* First you need to set ApplicatioName.
-       This is also the folder where your cache will reside.
-       Depending on the host OS the location of this folder
-       might be different. On windows it would be something
-       like C:\ProgramData\<ApplicationName>\SimpleObjectCache
-    */ 
-    var cache = new SqliteObjectCache { ApplicationName = "MyApplication"};
+    var cache = new SqliteObjectCache { DatabasePath = "cache.db"};
 
     // Create an object.
     var john = new Person() {Name = "john", Age = 19};
@@ -75,3 +70,4 @@ SimpleObjectCache a [Nicola Iarocci][ni] open source project, and it is [BSD][bs
 [bsd]: http://github.com/nicolaiarocci/SimpleObjectCache/blob/master/LICENSE
 [ni]: http://nicolaiarocci.com
 [nu]: https://www.nuget.org/packages/SimpleObjectCache/
+[ns]: https://github.com/dotnet/standard/blob/master/docs/versions/netstandard1.1.md

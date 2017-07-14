@@ -10,7 +10,10 @@ namespace SimpleObjectCache
     /// </summary>
     public interface IObjectCache : IDisposable
     {
-		string ApplicationName { get; set; }
+        /// <summary>
+        /// Database path, filename included.
+        /// </summary>
+		string DatabasePath { get; set; }
         /// <summary>
         /// Retrieve an object of type T from the key-value cache. 
         /// </summary>

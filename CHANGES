@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v2.0.0
+======
+
+- Move to Net Standard 
+- New: DatabasePath property. Required.
+- ApplicationName has been removed.
+
 v1.0.0
 ======
 

@@ -1,10 +1,5 @@
-﻿using System;
-
-#if NET4
-using SQLite;
-#else
-using SQLite.Net.Attributes;
-#endif
+﻿using SQLite;
+using System;
 
 namespace SimpleObjectCache
 {

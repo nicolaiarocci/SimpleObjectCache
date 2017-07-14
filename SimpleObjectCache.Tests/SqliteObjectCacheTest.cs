@@ -12,23 +12,22 @@ namespace SimpleObjectCache
     [TestFixture]
     internal class SqliteObjectCacheTest
     {
-        private string _expectedDatabasePath;
-        private const string AppName = "test";
-
-        private readonly SqliteObjectCache _cache = new SqliteObjectCache();
+        private SqliteObjectCache _cache;
         private SQLiteConnection _connection;
 
         [SetUp]
         public void Setup()
         {
-            _cache.ApplicationName = AppName;
+            var expectedDatabasePath = Path.Combine(
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "test"));
 
-            _expectedDatabasePath = Path.Combine(
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), AppName),
-                "SimpleObjectCache");
+            Directory.CreateDirectory(expectedDatabasePath);
 
-            Directory.CreateDirectory(_expectedDatabasePath);
-            _connection = new SQLiteConnection(Path.Combine(_expectedDatabasePath, "cache.db3"));
+            var db = Path.Combine(expectedDatabasePath, "SimpleObjectCache.db");
+
+            _cache = new SqliteObjectCache() { DatabasePath = db };
+
+            _connection = new SQLiteConnection(db);
             _connection.DropTable<CacheElement>();
 
         }
@@ -40,20 +39,6 @@ namespace SimpleObjectCache
             _connection.Close();
         }
 
-
-        [Test]
-        public void ApplicationName()
-        {
-            _cache.ApplicationName = null;
-
-            Assert.That(() => _cache.ApplicationName,
-                Throws.Exception
-                    .TypeOf<SimpleObjectCacheApplicationNameNullException>()
-                    .With.Message.EqualTo("Make sure to set ApplicationName on startup"));
-
-            _cache.ApplicationName = AppName;
-            Assert.That(_cache.ApplicationName, Is.EqualTo(AppName));
-        }
 
         [Test]
         public async Task Insert()
